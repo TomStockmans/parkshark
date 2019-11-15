@@ -17,4 +17,12 @@ public class Director {
 
     public Director() {
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
 }

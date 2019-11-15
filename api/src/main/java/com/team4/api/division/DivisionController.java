@@ -1,5 +1,6 @@
 package com.team4.api.division;
 
+import com.team4.domain.division.Division;
 import com.team4.service.division.DivisionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,8 +22,8 @@ public class DivisionController {
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public DivisionDto createDivision(@RequestBody CreateDivisionDto createDivisionDto){
-
-        return null;
+    public DivisionDto createDivision(@RequestBody DivisionDto divisionDto){
+        Division added = divisionService.createDivision(DivisionMapper.mapToDivision(divisionDto));
+        return DivisionMapper.mapToDivisionDto(added);
     }
 }
