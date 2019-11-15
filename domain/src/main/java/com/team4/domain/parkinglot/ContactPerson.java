@@ -30,7 +30,7 @@ public class ContactPerson {
     }
     private void setEmail(String email) {
         if (!Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE).matcher(email).find()) {
-            throw new DomainException("email is not valid");
+            throw new ParkingLotException("email is not valid");
         }
         this.email = email;
     }
@@ -38,7 +38,7 @@ public class ContactPerson {
     private void setMobileAndTelephoneNumber(String mobilphoneNumber, String telephoneNumber) {
         if ((mobilphoneNumber == null || mobilphoneNumber.trim().isEmpty())
                 && (telephoneNumber == null || telephoneNumber.trim().isEmpty())) {
-            throw new DomainException("you have to provide a mobile or telephone number");
+            throw new ParkingLotException("you have to provide a mobile or telephone number");
         }
         this.mobilePhoneNumber = mobilphoneNumber;
         this.telephoneNumber = telephoneNumber;

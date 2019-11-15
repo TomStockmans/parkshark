@@ -8,11 +8,11 @@ class ContactPersonTest {
     @Test
     void whenEmailIsNotValid_ExceptionIsThrown() {
 
-        Assertions.assertThrows(DomainException.class, () -> {new ContactPerson("emailst.be","0496209967", "016258989"
+        Assertions.assertThrows(ParkingLotException.class, () -> {new ContactPerson("emailst.be","0496209967", "016258989"
                 , new Adress("straat","56","3000, Leuven"));});
-        Assertions.assertThrows(DomainException.class, () -> {new ContactPerson("email@stbe","0496209967", "016258989"
+        Assertions.assertThrows(ParkingLotException.class, () -> {new ContactPerson("email@stbe","0496209967", "016258989"
                 , new Adress("straat","56","3000, Leuven"));});
-        Assertions.assertThrows(DomainException.class, () -> {new ContactPerson("email@.be","0496209967", "016258989"
+        Assertions.assertThrows(ParkingLotException.class, () -> {new ContactPerson("email@.be","0496209967", "016258989"
                 , new Adress("straat","56","3000, Leuven"));});
 
     }
@@ -25,13 +25,13 @@ class ContactPersonTest {
 
     @Test
     void whenNoPhoneOrMobilePhoneIsGiven_thenExceptionIsThrown() {
-        Assertions.assertThrows(DomainException.class, () -> {new ContactPerson("email@st.be",null, null
+        Assertions.assertThrows(ParkingLotException.class, () -> {new ContactPerson("email@st.be",null, null
                 , new Adress("straat","56","3000, Leuven"));});
-        Assertions.assertThrows(DomainException.class, () -> {new ContactPerson("email@st.be","", null
+        Assertions.assertThrows(ParkingLotException.class, () -> {new ContactPerson("email@st.be","", null
                 , new Adress("straat","56","3000, Leuven"));});
-        Assertions.assertThrows(DomainException.class, () -> {new ContactPerson("email@st.be",null, ""
+        Assertions.assertThrows(ParkingLotException.class, () -> {new ContactPerson("email@st.be",null, ""
                 , new Adress("straat","56","3000, Leuven"));});
-        Assertions.assertThrows(DomainException.class, () -> {new ContactPerson("email@st.be","  ", ""
+        Assertions.assertThrows(ParkingLotException.class, () -> {new ContactPerson("email@st.be","  ", ""
                 , new Adress("straat","56","3000, Leuven"));});
     }
 

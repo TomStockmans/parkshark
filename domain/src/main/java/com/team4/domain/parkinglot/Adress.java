@@ -21,7 +21,7 @@ public class Adress {
 
     public void setPostalCode(String postalCode) {
         if (postalCode == null || !Pattern.compile("^[0-9]{4}, .+", Pattern.CASE_INSENSITIVE).matcher(postalCode).find()) {
-            throw new DomainException("invalid postal code");
+            throw new ParkingLotException("invalid postal code");
         }
         this.postalCode = postalCode;
     }
