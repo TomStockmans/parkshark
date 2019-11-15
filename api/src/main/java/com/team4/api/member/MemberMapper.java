@@ -5,9 +5,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MemberMapper {
-    public static Member mapToMember(MemberDto memberDto) {
-        return new Member(memberDto.getName(), memberDto.getAddress(), memberDto.getPhoneNumber(), memberDto.getEmail(), memberDto.getLicensePlate());
-    }
 
     public static MemberDto mapToMemberDto(Member member){
         MemberDto memberDto = new MemberDto();
@@ -17,5 +14,15 @@ public class MemberMapper {
         memberDto.setLicensePlate(member.getLicensePlate());
         memberDto.setRegistrationDate((member.getRegistrationDate()));
         return memberDto;
+    }
+
+    public static FindAllMembersDto mapToFindAllMemberDto(Member member) {
+        FindAllMembersDto findAllMembersDto = new FindAllMembersDto();
+        findAllMembersDto.setName(member.getName());
+        findAllMembersDto.setPlateNumber(member.getLicensePlate().getPlateNumber());
+        findAllMembersDto.setPhoneNumber(member.getPhoneNumber());
+        findAllMembersDto.setRegistrationDate(member.getRegistrationDate());
+
+        return findAllMembersDto;
     }
 }

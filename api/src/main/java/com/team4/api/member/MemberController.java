@@ -1,13 +1,14 @@
 package com.team4.api.member;
 
+import com.team4.domain.member.Member;
 import com.team4.service.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -24,10 +25,17 @@ public class MemberController {
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
-    public List<MemberDto> getAllMembers() {
+    public List<FindAllMembersDto> getAllMembers() {
         return memberService.getAllMembers().stream()
-                .map(MemberMapper::mapToMemberDto)
+                .map(MemberMapper::mapToFindAllMemberDto)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public MemberDto getMemberById(@PathVariable long id) {
+        Member member = memberService.getMemberById(id);
+        return MemberMapper.mapToMemberDto(member);
     }
 
 }

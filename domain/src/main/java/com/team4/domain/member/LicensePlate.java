@@ -11,4 +11,8 @@ public class LicensePlate {
         this.plateNumber = plateNumber;
         this.issuingCountry = issuingCountry;
     }
+
+    public String getPlateNumber() {
+        return plateNumber;
+    }
 }
