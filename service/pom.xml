@@ -10,6 +10,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>service</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.team4</groupId>
+            <artifactId>domain</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
     <dependencies>
         <dependency>
