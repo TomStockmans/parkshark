@@ -1,4 +1,4 @@
-package be.niels.jpaskeleton.secret;
+package be.team4.parkshark.secret;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

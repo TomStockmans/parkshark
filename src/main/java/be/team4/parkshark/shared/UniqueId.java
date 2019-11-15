@@ -1,4 +1,4 @@
-package be.niels.jpaskeleton.shared;
+package be.team4.parkshark.shared;
 
 import java.io.Serializable;
 import java.util.Objects;

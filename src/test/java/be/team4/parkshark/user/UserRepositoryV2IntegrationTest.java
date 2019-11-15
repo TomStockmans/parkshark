@@ -1,8 +1,9 @@
-package be.niels.jpaskeleton.user;
+package be.team4.parkshark.user;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,23 +11,25 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * This test class uses the @DataJpaTest annotation:
+ * This test class uses the @DataJpaTest annotation, and also sets 'test' as the active profile of Spring.
  * Closely inspect the full output when running this test. You will notice the following:
  * + Spring will find the Spring Data Repositories
  *      "Finished Spring Data repository scanning in 92ms. Found 2 repository interfaces."
  * + Spring will replace the DataSource with an embedded (H2) variant, which it will also start (it's added as a dependency)
- * + Hibernate, activated by Spring, will drop existing tables / sequences and create new tables and sequences based
- *      on the JPA annotations (e.g. For User and Secret). Thus, JPA is used to generate the Database Schema.
+ * + Hibernate DDL is turned off (check application-test.properties), it is automatically used when the profile is set to 'test'.
+ *      + You will see that we have set property 'spring.jpa.hibernate.ddl-auto' to value 'none'
+ *      + Instead, we provided a schema.sql file, this file will be automatically executed by Spring when property 'ddl-auto' is set to 'none'
  * + For each test method, a (test) transaction will be created, after each test method the transaction will end with a rollback
  * + At the end, the embedded H2 database is shutdown.
  */
 @DataJpaTest
-class UserRepositoryIntegrationTest {
+@ActiveProfiles("test")
+class UserRepositoryV2IntegrationTest {
 
     private final UserRepository userRepository;
 
     @Autowired
-    UserRepositoryIntegrationTest(UserRepository userRepository) {
+    UserRepositoryV2IntegrationTest(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -62,6 +65,5 @@ class UserRepositoryIntegrationTest {
                 .isPresent()
                 .get().isEqualTo(dirk);
     }
-
 
 }

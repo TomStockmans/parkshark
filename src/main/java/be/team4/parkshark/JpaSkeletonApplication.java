@@ -1,9 +1,9 @@
-package be.niels.jpaskeleton;
+package be.team4.parkshark;
 
-import be.niels.jpaskeleton.secret.Secret;
-import be.niels.jpaskeleton.secret.SecretRepository;
-import be.niels.jpaskeleton.user.User;
-import be.niels.jpaskeleton.user.UserRepository;
+import be.team4.parkshark.secret.Secret;
+import be.team4.parkshark.secret.SecretRepository;
+import be.team4.parkshark.user.User;
+import be.team4.parkshark.user.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

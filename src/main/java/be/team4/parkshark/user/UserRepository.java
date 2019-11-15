@@ -1,4 +1,4 @@
-package be.niels.jpaskeleton.user;
+package be.team4.parkshark.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

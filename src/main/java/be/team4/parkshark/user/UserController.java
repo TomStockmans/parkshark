@@ -1,6 +1,6 @@
-package be.niels.jpaskeleton.user;
+package be.team4.parkshark.user;
 
-import be.niels.jpaskeleton.user.dtos.GetAllUserResponse;
+import be.team4.parkshark.user.dtos.GetAllUserResponse;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

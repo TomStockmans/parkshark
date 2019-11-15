@@ -1,7 +1,8 @@
-package be.niels.jpaskeleton.secret;
+package be.team4.parkshark.secret;
 
-import be.niels.jpaskeleton.user.User;
-import be.niels.jpaskeleton.user.UserRepository;
+import be.team4.parkshark.user.User;
+import be.team4.parkshark.user.UserRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -20,7 +21,7 @@ class SecretRepositoryIntegrationTest {
     private final UserRepository userRepository;
 
     @Autowired
-    SecretRepositoryIntegrationTest(SecretRepository secretRepository, be.niels.jpaskeleton.user.UserRepository userRepository) {
+    SecretRepositoryIntegrationTest(SecretRepository secretRepository, UserRepository userRepository) {
         this.secretRepository = secretRepository;
         this.userRepository = userRepository;
     }
@@ -35,7 +36,7 @@ class SecretRepositoryIntegrationTest {
         assertThat(savedSecret).isNotNull();
         assertThat(savedSecret.getId()).isNotNull();
         assertThat(savedSecret.getContent()).isEqualTo("I sometimes find pleasure in writing bugs");
-        assertThat(savedSecret.getOwner()).isEqualTo(secretOwner);
+        Assertions.assertThat(savedSecret.getOwner()).isEqualTo(secretOwner);
     }
 
     @Test

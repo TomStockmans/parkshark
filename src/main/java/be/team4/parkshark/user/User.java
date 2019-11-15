@@ -1,7 +1,7 @@
-package be.niels.jpaskeleton.user;
+package be.team4.parkshark.user;
 
-import be.niels.jpaskeleton.shared.Identifiable;
-import be.niels.jpaskeleton.shared.UniqueId;
+import be.team4.parkshark.shared.Identifiable;
+import be.team4.parkshark.shared.UniqueId;
 
 import javax.persistence.*;
 import java.util.Objects;

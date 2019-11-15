@@ -1,6 +1,6 @@
-package be.niels.jpaskeleton.user.dtos;
+package be.team4.parkshark.user.dtos;
 
-import be.niels.jpaskeleton.user.User;
+import be.team4.parkshark.user.User;
 
 public class GetAllUserResponse {
 
