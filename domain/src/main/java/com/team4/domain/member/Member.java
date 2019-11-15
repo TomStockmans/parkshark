@@ -57,6 +57,34 @@ public class Member implements Person {
         this.registrationDate = LocalDate.now();
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public Name getName() {
+        return name;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public LicensePlate getLicensePlate() {
+        return licensePlate;
+    }
+
+    public LocalDate getRegistrationDate() {
+        return registrationDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

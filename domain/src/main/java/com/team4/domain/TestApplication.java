@@ -1,4 +1,4 @@
-package com.team4.domain.member;
+package com.team4.domain;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
