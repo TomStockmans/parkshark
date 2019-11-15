@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping(DivisionController.RESOURCE_URL)
 public class DivisionController {
@@ -25,5 +28,13 @@ public class DivisionController {
     public DivisionDto createDivision(@RequestBody DivisionDto divisionDto){
         Division added = divisionService.createDivision(DivisionMapper.mapToDivision(divisionDto));
         return DivisionMapper.mapToDivisionDto(added);
+    }
+
+    @GetMapping(produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public List<DivisionDto> getAllDivisions(){
+        return divisionService.getAllDivisions().stream()
+                .map(DivisionMapper::mapToDivisionDto)
+                .collect(Collectors.toList());
     }
 }
