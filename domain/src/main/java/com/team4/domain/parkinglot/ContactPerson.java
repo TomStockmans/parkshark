@@ -1,9 +1,6 @@
 package com.team4.domain.parkinglot;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.regex.Pattern;
 
 @Entity
@@ -12,6 +9,8 @@ public class ContactPerson {
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTACT_PERSON_SEQ")
+    @SequenceGenerator(sequenceName = "contact_person_seq", allocationSize = 1, name = "CONTACT_PERSON_SEQ")
     private long id;
     private String email;
     private String mobilePhoneNumber;
@@ -43,5 +42,17 @@ public class ContactPerson {
         }
         this.mobilePhoneNumber = mobilphoneNumber;
         this.telephoneNumber = telephoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getTelephoneNumber() {
+        return telephoneNumber;
+    }
+
+    public String getMobilePhoneNumber() {
+        return mobilePhoneNumber;
     }
 }

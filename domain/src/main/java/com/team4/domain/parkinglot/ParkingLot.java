@@ -11,10 +11,12 @@ public class ParkingLot {
     @SequenceGenerator(sequenceName = "parkinglot_seq", allocationSize = 1, name = "PARKINGLOT_SEQ")
     private long id;
     private String name;
+
+    @Enumerated(EnumType.STRING)
     private ParkingCategory parkingCategory;
     private int capacity;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private ContactPerson contactPerson;
 
     public ParkingLot(String name, ParkingCategory parkingCategory, int capacity, ContactPerson contactPerson) {
@@ -22,6 +24,25 @@ public class ParkingLot {
         this.parkingCategory = parkingCategory;
         this.capacity = capacity;
         this.contactPerson = contactPerson;
+    }
+
+    public ParkingLot() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public ContactPerson getContactPerson() {
+        return contactPerson;
     }
 
     @Override
@@ -35,6 +56,4 @@ public class ParkingLot {
                 '}';
     }
 
-    public ParkingLot() {
-    }
 }
