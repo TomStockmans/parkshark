@@ -57,6 +57,19 @@
         </dependency>
     </dependencies>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.team4.parkshark</groupId>
+                <artifactId>domain</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>com.team4.parkshark</groupId>
+                <artifactId>service</artifactId>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <build>
         <plugins>
             <plugin>
