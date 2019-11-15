@@ -1,5 +1,8 @@
 package com.team4.domain.member;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Address {
     private final String streetName;
     private final String houseNumber;

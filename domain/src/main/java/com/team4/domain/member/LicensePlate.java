@@ -1,5 +1,8 @@
 package com.team4.domain.member;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class LicensePlate {
     private final String plateNumber;
     private final String issuingCountry;
