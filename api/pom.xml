@@ -11,5 +11,12 @@
 
     <artifactId>api</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.team4</groupId>
+            <artifactId>service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>
