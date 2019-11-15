@@ -65,6 +65,8 @@ class DivisionControllerIntegrationTest {
                         .as(DivisionDto.class);
 
         assertThat(created.name).isEqualTo(divisionDto.name);
-
+        assertThat(created.originalName).isEqualTo(divisionDto.originalName);
+        assertThat(created.director.firstName).isEqualTo(divisionDto.director.firstName);
+        assertThat(created.director.lastName).isEqualTo(divisionDto.director.lastName);
     }
 }
