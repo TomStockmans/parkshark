@@ -34,4 +34,7 @@ public class Allocation {
         this.parkingLot = parkingLot;
         this.startTime = LocalDateTime.now();
     }
+
+    public Allocation() {
+    }
 }
