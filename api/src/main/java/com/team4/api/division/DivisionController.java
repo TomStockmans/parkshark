@@ -25,16 +25,23 @@ public class DivisionController {
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public DivisionDto createDivision(@RequestBody DivisionDto divisionDto){
+    public DivisionDto createDivision(@RequestBody CreateDivisionDto divisionDto) {
         Division added = divisionService.createDivision(DivisionMapper.mapToDivision(divisionDto));
         return DivisionMapper.mapToDivisionDto(added);
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public List<DivisionDto> getAllDivisions(){
+    public List<DivisionDto> getAllDivisions() {
         return divisionService.getAllDivisions().stream()
                 .map(DivisionMapper::mapToDivisionDto)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public DivisionDto getDivisionById(@PathVariable long id) {
+        Division division = divisionService.getDivisionById(id);
+        return DivisionMapper.mapToDivisionDto(division);
     }
 }

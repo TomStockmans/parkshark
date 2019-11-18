@@ -27,6 +27,7 @@ public class MemberController {
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
     public List<FindAllMembersDto> getAllMembers() {
         return memberService.getAllMembers().stream()
                 .map(MemberMapper::mapToFindAllMemberDto)
@@ -42,9 +43,9 @@ public class MemberController {
 
     @PostMapping(path = "/register", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public MemberDto addBook(@RequestBody MemberDto memberDto) {
-        memberService.registerMember(MemberMapper.mapToMember(memberDto));
-        return MemberMapper.mapToMemberDto(MemberMapper.mapToMember(memberDto));
+    public MemberDto registerMember(@RequestBody MemberDto memberDto) {
+        Member registered = memberService.registerMember(MemberMapper.mapToMember(memberDto));
+        return MemberMapper.mapToMemberDto(registered);
     }
 
 }

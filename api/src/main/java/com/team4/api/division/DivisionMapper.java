@@ -5,12 +5,13 @@ import com.team4.domain.division.Division;
 
 public class DivisionMapper {
 
-    public static Division mapToDivision(DivisionDto divisionDto){
+    public static Division mapToDivision(CreateDivisionDto divisionDto){
         return new Division(divisionDto.name, divisionDto.originalName, new Director(divisionDto.director.firstName, divisionDto.director.lastName));
     }
 
     public static DivisionDto mapToDivisionDto(Division division){
         return new DivisionDto(
+                division.getId(),
                 division.getName(),
                 division.getOriginalName(),
                 new DirectorDto(

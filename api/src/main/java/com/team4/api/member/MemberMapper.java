@@ -7,32 +7,14 @@ import org.springframework.stereotype.Component;
 public class MemberMapper {
 
     public static MemberDto mapToMemberDto(Member member){
-        MemberDto memberDto = new MemberDto();
-        memberDto.setName(member.getName());
-        memberDto.setAddress(member.getAddress());
-        memberDto.setPhoneNumber(member.getPhoneNumber());
-        memberDto.setLicensePlate(member.getLicensePlate());
-        memberDto.setRegistrationDate((member.getRegistrationDate()));
-        return memberDto;
+        return new MemberDto(member.getName(), member.getAddress(), member.getLicensePlate(), member.getPhoneNumber(), member.getEmail());
     }
 
     public static FindAllMembersDto mapToFindAllMemberDto(Member member) {
-        FindAllMembersDto findAllMembersDto = new FindAllMembersDto();
-        findAllMembersDto.setName(member.getName());
-        findAllMembersDto.setPlateNumber(member.getLicensePlate().getPlateNumber());
-        findAllMembersDto.setPhoneNumber(member.getPhoneNumber());
-        findAllMembersDto.setRegistrationDate(member.getRegistrationDate());
-
-        return findAllMembersDto;
+        return new FindAllMembersDto(member.getId(), member.getName(), member.getLicensePlate().getPlateNumber(), member.getPhoneNumber(), member.getEmail(), member.getRegistrationDate());
     }
 
     public static Member mapToMember(MemberDto memberDto) {
-        Member member = new Member();
-        member.setName(memberDto.getName());
-        member.setAddress(memberDto.getAddress());
-        member.setPhoneNumber(memberDto.getPhoneNumber());
-        member.setLicensePlate(memberDto.getLicensePlate());
-        member.setRegistrationDate(memberDto.getRegistrationDate());
-        return  member;
+        return new Member(memberDto.getName(), memberDto.getAddress(), memberDto.getPhoneNumber(), memberDto.getEmail(), memberDto.getLicensePlate());
     }
 }

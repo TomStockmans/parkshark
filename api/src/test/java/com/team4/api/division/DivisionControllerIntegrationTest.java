@@ -32,7 +32,7 @@ class DivisionControllerIntegrationTest {
     }
 
     @Test
-    void getAllDivision_thenReturnBooks() {
+    void getAllDivisions_thenReturnDivisions() {
         List divisionDtos =
                 RestAssured
                         .given()
@@ -52,7 +52,7 @@ class DivisionControllerIntegrationTest {
 
     @Test
     void createDivision_givenCorrectDto_thenCreateDivisionAndAddToRepository() {
-        DivisionDto divisionDto = new DivisionDto("Another division", "We used to have a boring name", new DirectorDto("Jan", "Janssens"));
+        CreateDivisionDto divisionDto = new CreateDivisionDto("Another division", "We used to have a boring name", new DirectorDto("Jan", "Janssens"));
 
         DivisionDto created =
                 RestAssured
@@ -73,5 +73,27 @@ class DivisionControllerIntegrationTest {
         assertThat(created.originalName).isEqualTo(divisionDto.originalName);
         assertThat(created.director.firstName).isEqualTo(divisionDto.director.firstName);
         assertThat(created.director.lastName).isEqualTo(divisionDto.director.lastName);
+    }
+
+    @Test
+    void getDivisionById_givenCorrectId_thenReturnDivisionDto() {
+        DivisionDto foundDivision =
+                RestAssured
+                        .given()
+                        .accept(JSON)
+                        .contentType(JSON)
+                        .when()
+                        .port(port)
+                        .get("/division/" + division.getId())
+                        .then()
+                        .assertThat()
+                        .statusCode(HttpStatus.OK.value())
+                        .extract()
+                        .as(DivisionDto.class);
+
+        assertThat(division.getName()).isEqualTo(foundDivision.name);
+        assertThat(division.getOriginalName()).isEqualTo(foundDivision.originalName);
+        assertThat(division.getDirector().getFirstName()).isEqualTo(foundDivision.director.firstName);
+        assertThat(division.getDirector().getLastName()).isEqualTo(foundDivision.director.lastName);
     }
 }

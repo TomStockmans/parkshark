@@ -18,4 +18,8 @@ public class LicensePlate {
     public String getPlateNumber() {
         return plateNumber;
     }
+
+    public String getIssuingCountry() {
+        return issuingCountry;
+    }
 }
