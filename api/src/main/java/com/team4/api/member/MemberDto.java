@@ -15,9 +15,9 @@ public class MemberDto {
     private String phoneNumber;
     private String email;
     private LocalDate registrationDate;
-    private MembershipLevel membershipLevel;
+    private String membershipLevel;
 
-    public MemberDto(long id, Name name, Address address, LicensePlate licensePlate, String phoneNumber, String email) {
+    public MemberDto(long id, Name name, Address address, LicensePlate licensePlate, String phoneNumber, String email, String membershipLevel) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -25,26 +25,7 @@ public class MemberDto {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.registrationDate = LocalDate.now();
-        this.membershipLevel = MembershipLevel.BRONZE;
-    }
-
-    public MemberDto(long id, Name name, Address address, LicensePlate licensePlate, String phoneNumber, String email, MembershipLevel membershipLevel) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.licensePlate = licensePlate;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.registrationDate = LocalDate.now();
-        this.membershipLevel = membershipLevel;
-    }
-
-    public MembershipLevel getMembershipLevel() {
-        return membershipLevel;
-    }
-
-    public void setMembershipLevel(MembershipLevel membershipLevel) {
-        this.membershipLevel = membershipLevel;
+        this.membershipLevel = membershipLevel == null ? MembershipLevel.BRONZE.name() : membershipLevel;
     }
 
     public Name getName() {
@@ -85,5 +66,13 @@ public class MemberDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getMembershipLevel() {
+        return membershipLevel;
+    }
+
+    public void setMembershipLevel(String membershipLevel) {
+        this.membershipLevel = membershipLevel;
     }
 }

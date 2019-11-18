@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class MemberMapper {
 
     public static MemberDto mapToMemberDto(Member member){
-        return new MemberDto(member.getId(), member.getName(), member.getAddress(), member.getLicensePlate(), member.getPhoneNumber(), member.getEmail(), member.getMembershipLevel());
+        return new MemberDto(member.getId(), member.getName(), member.getAddress(), member.getLicensePlate(), member.getPhoneNumber(), member.getEmail(), member.getMembershipLevel().name());
     }
 
     public static FindAllMembersDto mapToFindAllMemberDto(Member member) {
@@ -15,6 +15,6 @@ public class MemberMapper {
     }
 
     public static Member mapToMember(MemberDto memberDto) {
-        return new Member(memberDto.getName(), memberDto.getAddress(), memberDto.getPhoneNumber(), memberDto.getEmail(), memberDto.getLicensePlate(), memberDto.getMembershipLevel());
+        return new Member(memberDto.getName(), memberDto.getAddress(), memberDto.getPhoneNumber(), memberDto.getEmail(), memberDto.getLicensePlate());
     }
 }
