@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @RestController
 @RequestMapping(MemberController.RESOURCE_URL)
 public class MemberController {
@@ -36,6 +38,13 @@ public class MemberController {
     public MemberDto getMemberById(@PathVariable long id) {
         Member member = memberService.getMemberById(id);
         return MemberMapper.mapToMemberDto(member);
+    }
+
+    @PostMapping(path = "/register", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public MemberDto addBook(@RequestBody MemberDto memberDto) {
+        memberService.registerMember(MemberMapper.mapToMember(memberDto));
+        return MemberMapper.mapToMemberDto(MemberMapper.mapToMember(memberDto));
     }
 
 }

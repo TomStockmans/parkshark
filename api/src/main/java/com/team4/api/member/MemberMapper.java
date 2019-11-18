@@ -25,4 +25,14 @@ public class MemberMapper {
 
         return findAllMembersDto;
     }
+
+    public static Member mapToMember(MemberDto memberDto) {
+        Member member = new Member();
+        member.setName(memberDto.getName());
+        member.setAddress(memberDto.getAddress());
+        member.setPhoneNumber(memberDto.getPhoneNumber());
+        member.setLicensePlate(memberDto.getLicensePlate());
+        member.setRegistrationDate(memberDto.getRegistrationDate());
+        return  member;
+    }
 }

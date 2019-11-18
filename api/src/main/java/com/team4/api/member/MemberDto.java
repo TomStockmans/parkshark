@@ -31,7 +31,7 @@ public class MemberDto {
         return email;
     }
 
-    public LicensePlate getPlateNumber() {
+    public LicensePlate getLicensePlate() {
         return licensePlate;
     }
 

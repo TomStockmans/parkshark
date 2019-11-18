@@ -23,4 +23,11 @@ class MemberRepositoryIntegrationTest {
         Assertions.assertFalse(memberRepository.findAll().isEmpty());
     }
 
+    @Test
+    void saveMember_givenAMember_whenSaved_thenExistsInRepository() {
+        Member member = new Member(new Name("Elvis", "Presley"), new Address("Main Boulevard", "69", "9999", "USA"), "0123456789", "elvis.presley@yahoo.com", new LicensePlate("KING888", "USA"));
+        Member saved = memberRepository.save(member);
+        Assertions.assertEquals(member, saved);
+    }
+
 }

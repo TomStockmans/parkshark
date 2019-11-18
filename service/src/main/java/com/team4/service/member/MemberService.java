@@ -30,4 +30,7 @@ public class MemberService {
         return member.get();
     }
 
+    public Member registerMember(Member member) {
+        return memberRepository.save(member);
+    }
 }
