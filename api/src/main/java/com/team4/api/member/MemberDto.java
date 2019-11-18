@@ -2,25 +2,49 @@ package com.team4.api.member;
 
 import com.team4.domain.member.Address;
 import com.team4.domain.member.LicensePlate;
+import com.team4.domain.member.MembershipLevel;
 import com.team4.domain.member.Name;
 
 import java.time.LocalDate;
 
 public class MemberDto {
+    private long id;
     private Name name;
     private Address address;
     private LicensePlate licensePlate;
     private String phoneNumber;
     private String email;
     private LocalDate registrationDate;
+    private MembershipLevel membershipLevel;
 
-    public MemberDto(Name name, Address address, LicensePlate licensePlate, String phoneNumber, String email, LocalDate registrationDate) {
+    public MemberDto(long id, Name name, Address address, LicensePlate licensePlate, String phoneNumber, String email) {
+        this.id = id;
         this.name = name;
         this.address = address;
         this.licensePlate = licensePlate;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.registrationDate = registrationDate;
+        this.registrationDate = LocalDate.now();
+        this.membershipLevel = MembershipLevel.BRONZE;
+    }
+
+    public MemberDto(long id, Name name, Address address, LicensePlate licensePlate, String phoneNumber, String email, MembershipLevel membershipLevel) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.licensePlate = licensePlate;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.registrationDate = LocalDate.now();
+        this.membershipLevel = membershipLevel;
+    }
+
+    public MembershipLevel getMembershipLevel() {
+        return membershipLevel;
+    }
+
+    public void setMembershipLevel(MembershipLevel membershipLevel) {
+        this.membershipLevel = membershipLevel;
     }
 
     public Name getName() {
@@ -61,13 +85,5 @@ public class MemberDto {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public LocalDate getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(LocalDate registrationDate) {
-        this.registrationDate = registrationDate;
     }
 }
