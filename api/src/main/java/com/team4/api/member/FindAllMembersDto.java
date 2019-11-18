@@ -1,16 +1,25 @@
 package com.team4.api.member;
 
-import com.team4.domain.member.Address;
 import com.team4.domain.member.Name;
 
 import java.time.LocalDate;
 
 public class FindAllMembersDto {
+    private long id;
     private Name name;
-    private Address address;
     private String plateNumber;
     private String phoneNumber;
+    private String email;
     private LocalDate registrationDate;
+
+    public FindAllMembersDto(long id, Name name, String plateNumber, String phoneNumber, String email, LocalDate registrationDate) {
+        this.id = id;
+        this.name = name;
+        this.plateNumber = plateNumber;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.registrationDate = registrationDate;
+    }
 
     public Name getName() {
         return name;
@@ -20,12 +29,20 @@ public class FindAllMembersDto {
         this.name = name;
     }
 
-    public Address getAddress() {
-        return address;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getPlateNumber() {

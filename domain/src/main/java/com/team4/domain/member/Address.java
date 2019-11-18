@@ -16,6 +16,22 @@ public class Address {
         this.country = country;
     }
 
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public String getHouseNumber() {
+        return houseNumber;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
     public Address() {
     }
 }
