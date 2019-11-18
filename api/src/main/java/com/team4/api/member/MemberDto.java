@@ -63,11 +63,4 @@ public class MemberDto {
         this.email = email;
     }
 
-    public LocalDate getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(LocalDate registrationDate) {
-        this.registrationDate = registrationDate;
-    }
 }
