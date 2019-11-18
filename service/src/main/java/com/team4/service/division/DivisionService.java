@@ -34,4 +34,8 @@ public class DivisionService {
         }
         return division.get();
     }
+
+    public Division getByIdTijdelijk(long id){
+        return divisionRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("tijdelijk"));
+    }
 }
