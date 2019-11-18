@@ -27,7 +27,7 @@ class ParkingLotControllerIntegrationTest {
     @Test
     void createParkingLotTest() {
 
-        Division division = divisionRepository.save(new Division("Awesome division", "Old division name..", new Director("Niels", "Delestinne")));
+        Division division = divisionRepository.save(new Division("Awesome division", "Old division name..", new Director("Niels", "Delestinne"), null));
         CreateParkingLotDto createParkingLotDto = new CreateParkingLotDto(
                 "pk1",
                 ParkingCategory.UNDERGROUND_BUILDING,
@@ -80,7 +80,7 @@ class ParkingLotControllerIntegrationTest {
     @Test
     void getASingleParkingLotTest() {
 
-        Division division = new Division("Awesome division", "Old division name..", new Director("Niels", "Delestinne"));
+        Division division = new Division("Awesome division", "Old division name..", new Director("Niels", "Delestinne"),null);
         division = divisionRepository.save(division);
         ParkingLot parkingLot = new ParkingLot("pk3", ParkingCategory.ABOVE_GROUND_MEMBER, 8,
                 new ContactPerson("unknown.st@g.be", "0496858585", null,
