@@ -8,6 +8,7 @@ import com.team4.domain.parkinglot.ParkingLot;
 import com.team4.service.member.MemberService;
 import com.team4.service.parkinglot.ParkingLotService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,11 +31,21 @@ public class AllocationService {
             throw new AllocationException("Start allocation failed: given license plate number does not match member");
         }
         ParkingLot parkingLot = parkingLotService.getById(parkingLotId);
-        return null;
+        if (!isParkingLotAvailable(parkingLot)){
+            throw new AllocationException("Start allocation failed: no available space");
+        }
+        Allocation allocation = new Allocation(member, parkingLot);
+        return allocationRepository.save(allocation);
     }
 
-    private boolean isParkingLotAvailable(long parkingLotId){
-        return true;
+    private boolean isParkingLotAvailable(ParkingLot parkingLot){
+        int activeAllocations = allocationRepository.findAll(
+                Specification.where(AllocationRepository.hasParkingLotId(parkingLot.getId()))
+                .and(AllocationRepository.isActive())).size();
+        if (activeAllocations < parkingLot.getCapacity()){
+            return true;
+        }
+        return false;
     }
 
 }
