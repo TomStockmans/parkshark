@@ -30,7 +30,7 @@ public class ParkingLotController {
         ParkingLot parkingLot = parkingLotService.addNewParkingLot(
                 ParkingLotMapper.dtoToParkingLotObject(
                         parkingLotDto,
-                        divisionService.getByIdTijdelijk(
+                        divisionService.getDivisionById(
                                 parkingLotDto.divisionId
                         )
                 )
