@@ -2,6 +2,8 @@ package com.team4.api.parkinglot;
 
 import com.team4.domain.parkinglot.ParkingCategory;
 
+import java.util.Objects;
+
 public class SingleParkingLotDtoResponse {
 
     public long id;
@@ -31,6 +33,20 @@ public class SingleParkingLotDtoResponse {
             this.mobilePhoneNumber = mobilePhoneNumber;
             this.telephoneNumber = telephoneNumber;
             this.adress = adress;
+
+
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            ContactPerson that = (ContactPerson) o;
+            return id == that.id &&
+                    Objects.equals(email, that.email) &&
+                    Objects.equals(mobilePhoneNumber, that.mobilePhoneNumber) &&
+                    Objects.equals(telephoneNumber, that.telephoneNumber) &&
+                    Objects.equals(adress, that.adress);
         }
 
         public static class Adress{
@@ -43,8 +59,28 @@ public class SingleParkingLotDtoResponse {
                 this.streetNr = streetNr;
                 this.postalCode = postalCode;
             }
+
+            @Override
+            public boolean equals(Object o) {
+                if (this == o) return true;
+                if (o == null || getClass() != o.getClass()) return false;
+                Adress adress = (Adress) o;
+                return Objects.equals(street, adress.street) &&
+                        Objects.equals(streetNr, adress.streetNr) &&
+                        Objects.equals(postalCode, adress.postalCode);
+            }
         }
     }
 
-
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SingleParkingLotDtoResponse that = (SingleParkingLotDtoResponse) o;
+        return id == that.id &&
+                capacity == that.capacity &&
+                Objects.equals(name, that.name) &&
+                parkingCategory.equals(that.parkingCategory) &&
+                Objects.equals(contactPerson, that.contactPerson);
+    }
 }

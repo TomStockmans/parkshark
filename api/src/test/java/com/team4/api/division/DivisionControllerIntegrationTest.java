@@ -32,7 +32,7 @@ class DivisionControllerIntegrationTest {
     }
 
     @Test
-    void getAllBooks_thenReturnBooks() {
+    void getAllDivision_thenReturnBooks() {
         List divisionDtos =
                 RestAssured
                         .given()

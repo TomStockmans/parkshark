@@ -1,12 +1,12 @@
-package com.team4.service;
+package com.team4.service.parkinglot;
 
-import com.team4.domain.parkinglot.*;
+import com.team4.domain.parkinglot.ParkingLot;
+import com.team4.domain.parkinglot.ParkingLotException;
+import com.team4.domain.parkinglot.ParkingLotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 @Service
 public class ParkingLotService {
@@ -18,13 +18,6 @@ public class ParkingLotService {
     public ParkingLotService(ParkingLotRepository parkingLotRepository) {
 
         this.parkingLotRepository = parkingLotRepository;
-
-        parkingLotRepository.save(new ParkingLot("pk1", ParkingCategory.UNDERGROUND_BUILDING, 5,
-                new ContactPerson("tom.st@g.be", "0496209967", null,
-                        new Adress("elfnovemberlaan", "82", "3000, Leuven"))));
-        parkingLotRepository.save(new ParkingLot("pk2", ParkingCategory.ABOVE_GROUND_MEMBER, 7,
-                new ContactPerson("nick.st@g.be", "0496858585", null,
-                        new Adress("groove street", "69", "3010, Kessel-lo"))));
     }
 
     public List<ParkingLot> getAll(){

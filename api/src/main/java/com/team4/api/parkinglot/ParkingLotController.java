@@ -1,6 +1,6 @@
 package com.team4.api.parkinglot;
 
-import com.team4.service.ParkingLotService;
+import com.team4.service.parkinglot.ParkingLotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
