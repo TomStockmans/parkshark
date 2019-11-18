@@ -1,9 +1,6 @@
 package com.team4.api.division;
 
-import com.team4.api.parkinglot.ParkingLotController;
-import com.team4.api.parkinglot.ParkingLotMapper;
-import com.team4.api.parkinglot.ParkingLotResponseDto;
-import com.team4.api.parkinglot.SingleParkingLotDtoResponse;
+import com.team4.api.parkinglot.*;
 import com.team4.domain.division.Director;
 import com.team4.domain.division.Division;
 import com.team4.domain.division.DivisionRepository;
@@ -26,6 +23,43 @@ class ParkingLotControllerIntegrationTest {
     private ParkingLotRepository parkingLotRepository;
     @Autowired
     private DivisionRepository divisionRepository;
+
+    @Test
+    void createParkingLotTest() {
+
+        Division division = divisionRepository.save(new Division("Awesome division", "Old division name..", new Director("Niels", "Delestinne")));
+        CreateParkingLotDto createParkingLotDto = new CreateParkingLotDto(
+                "pk1",
+                ParkingCategory.UNDERGROUND_BUILDING,
+                7,
+                new CreateParkingLotDto.ContactPerson(
+                        "tom.st@m.be",
+                        "0496209967",
+                        "016258179",
+                        new CreateParkingLotDto.ContactPerson.Adress(
+                                "elfnovemberlaan",
+                                "82",
+                                "3010, Kessel-lo"
+                        )
+
+                ),
+                division.getId()
+        );
+
+        SingleParkingLotDtoResponse parkingLotResponseDtos = RestAssured
+                .given()
+                .accept(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(createParkingLotDto)
+                .port(port)
+                .post(ParkingLotController.PARKING_LOT_CONTROLLER_RESOURCE_URL)
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.CREATED.value())
+                .extract()
+                .as(SingleParkingLotDtoResponse.class);
+    }
 
     @Test
     void getAllParkingLotsTest() {

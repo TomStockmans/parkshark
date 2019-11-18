@@ -28,7 +28,7 @@ public class ParkingLotService {
         return parkingLotRepository.findById(id).orElseThrow(() -> new ParkingLotException("no parkinglot found for this id"));
     }
 
-    public void addNewParkingLot(ParkingLot parkingLot) {
-        parkingLotRepository.save(parkingLot);
+    public ParkingLot addNewParkingLot(ParkingLot parkingLot) {
+        return parkingLotRepository.save(parkingLot);
     }
 }

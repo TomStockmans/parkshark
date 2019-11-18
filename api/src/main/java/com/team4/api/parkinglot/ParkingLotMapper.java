@@ -57,6 +57,7 @@ public class ParkingLotMapper {
                                 )
                 ),
                 new DivisionDto(
+                        parkingLot.getDivision().getId(),
                         parkingLot.getDivision().getName(),
                         parkingLot.getDivision().getOriginalName(),
                         new DirectorDto(
