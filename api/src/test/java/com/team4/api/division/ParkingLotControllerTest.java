@@ -1,5 +1,7 @@
-package com.team4.api.parkinglot;
+package com.team4.api.division;
 
+import com.team4.api.parkinglot.ParkingLotController;
+import com.team4.api.parkinglot.ParkingLotResponseDto;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
