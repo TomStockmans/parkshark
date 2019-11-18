@@ -27,4 +27,8 @@ public class DivisionService {
         divisionRepository.findAll().forEach(divisions::add);
         return divisions;
     }
+
+    public Division getByIdTijdelijk(long id){
+        return divisionRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("tijdelijk"));
+    }
 }
