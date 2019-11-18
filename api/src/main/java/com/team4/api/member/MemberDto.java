@@ -2,7 +2,6 @@ package com.team4.api.member;
 
 import com.team4.domain.member.Address;
 import com.team4.domain.member.LicensePlate;
-import com.team4.domain.member.MembershipLevel;
 import com.team4.domain.member.Name;
 
 import java.time.LocalDate;
@@ -25,7 +24,11 @@ public class MemberDto {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.registrationDate = LocalDate.now();
-        this.membershipLevel = membershipLevel == null ? MembershipLevel.BRONZE.name() : membershipLevel;
+        if (!membershipLevel.equals("SILVER") && !membershipLevel.equals("GOLD")) {
+            this.membershipLevel = "BRONZE";
+        } else {
+            this.membershipLevel = membershipLevel;
+        }
     }
 
     public Name getName() {

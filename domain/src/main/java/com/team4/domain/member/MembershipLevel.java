@@ -15,5 +15,4 @@ public enum MembershipLevel {
         this.parkingTime = parkingTime;
     }
 
-
 }

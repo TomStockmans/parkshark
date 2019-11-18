@@ -17,7 +17,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(MemberController.RESOURCE_URL)
 public class MemberController {
 
-    public static final String RESOURCE_URL = "/member";
+    public static final String RESOURCE_URL = "/members";
     private static final String APPLICATION_JSON_VALUE = MediaType.APPLICATION_JSON_VALUE;
     private final MemberService memberService;
 
@@ -41,7 +41,7 @@ public class MemberController {
         return MemberMapper.mapToMemberDto(member);
     }
 
-    @PostMapping(path = "/register", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public MemberDto registerMember(@RequestBody MemberDto memberDto) {
         Member registered = memberService.registerMember(MemberMapper.mapToMember(memberDto));
