@@ -6,15 +6,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class MemberMapper {
 
-    public static MemberDto mapToMemberDto(Member member){
+    public static MemberDto toDto(Member member){
         return new MemberDto(member.getId(), member.getName(), member.getAddress(), member.getLicensePlate(), member.getPhoneNumber(), member.getEmail(), member.getMembershipLevel().name());
     }
 
-    public static FindAllMembersDto mapToFindAllMemberDto(Member member) {
+    public static FindAllMembersDto toFindAllMemberDto(Member member) {
         return new FindAllMembersDto(member.getId(), member.getName(), member.getLicensePlate().getPlateNumber(), member.getPhoneNumber(), member.getEmail(), member.getRegistrationDate());
     }
 
-    public static Member mapToMember(MemberDto memberDto) {
-        return new Member(memberDto.getName(), memberDto.getAddress(), memberDto.getPhoneNumber(), memberDto.getEmail(), memberDto.getLicensePlate());
+    public static Member toDomain(CreateMemberDto createMemberDto) {
+        return new Member(createMemberDto.getName(), createMemberDto.getAddress(), createMemberDto.getPhoneNumber(), createMemberDto.getEmail(), createMemberDto.getLicensePlate());
     }
 }
