@@ -17,14 +17,19 @@ public class Division {
     @Column(name = "ORIGINAL_NAME")
     private String originalName;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PARENT_ID")
+    private Division parentDivision;
+
     @Embedded
     private Director director;
 
 
-    public Division(String name, String originalName, Director director) {
+    public Division(String name, String originalName, Director director, Division parentDivision) {
         this.name = name;
         this.originalName = originalName;
         this.director = director;
+        this.parentDivision = parentDivision;
     }
 
     public Division() {
@@ -44,5 +49,9 @@ public class Division {
 
     public Director getDirector() {
         return director;
+    }
+
+    public Division getParentDivision() {
+        return parentDivision;
     }
 }

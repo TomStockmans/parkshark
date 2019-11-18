@@ -27,7 +27,7 @@ class DivisionControllerIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        division = new Division("Awesome division", "Old division name..", new Director("Niels", "Delestinne"));
+        division = new Division("Awesome division", "Old division name..", new Director("Niels", "Delestinne"),null);
         divisionService.createDivision(division);
     }
 
@@ -95,5 +95,30 @@ class DivisionControllerIntegrationTest {
         assertThat(division.getOriginalName()).isEqualTo(foundDivision.originalName);
         assertThat(division.getDirector().getFirstName()).isEqualTo(foundDivision.director.firstName);
         assertThat(division.getDirector().getLastName()).isEqualTo(foundDivision.director.lastName);
+    }
+
+    @Test
+    void createSubDivision_givenCorrectDto_thenCreateDivisionAndAddToRepository() {
+        CreateDivisionDto divisionDto = new CreateDivisionDto("Another division", "We used to have a boring name", new DirectorDto("Jan", "Janssens"));
+
+        DivisionDto created =
+                RestAssured
+                        .given()
+                        .body(divisionDto)
+                        .accept(JSON)
+                        .contentType(JSON)
+                        .when()
+                        .port(port)
+                        .post("/division/" + division.getId())
+                        .then()
+                        .assertThat()
+                        .statusCode(HttpStatus.CREATED.value())
+                        .extract()
+                        .as(DivisionDto.class);
+
+        assertThat(created.name).isEqualTo(divisionDto.name);
+        assertThat(created.originalName).isEqualTo(divisionDto.originalName);
+        assertThat(created.director.firstName).isEqualTo(divisionDto.director.firstName);
+        assertThat(created.director.lastName).isEqualTo(divisionDto.director.lastName);
     }
 }

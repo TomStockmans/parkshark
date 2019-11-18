@@ -30,6 +30,14 @@ public class DivisionController {
         return DivisionMapper.mapToDivisionDto(added);
     }
 
+    @PostMapping(path = "/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public DivisionDto createSubDivision(@RequestBody CreateDivisionDto divisionDto, @PathVariable long id) {
+        Division parent = divisionService.getDivisionById(id);
+        Division added = divisionService.createDivision(DivisionMapper.mapToDivision(divisionDto, parent));
+        return DivisionMapper.mapToDivisionDto(added);
+    }
+
     @GetMapping(produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public List<DivisionDto> getAllDivisions() {
