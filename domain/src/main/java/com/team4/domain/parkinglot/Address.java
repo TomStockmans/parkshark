@@ -4,19 +4,20 @@ import javax.persistence.Embeddable;
 import java.util.regex.Pattern;
 
 @Embeddable
-public class Adress {
+public class Address {
     //The address consists of a street name, street number, and a postal code
     private String street;
     private String streetNr;
     private String postalCode;
 
 
-    public Adress(String street, String streetNr, String postalCode) {
+    public Address(String street, String streetNr, String postalCode) {
         this.street = street;
         this.streetNr = streetNr;
         setPostalCode(postalCode);
     }
-    public Adress() {
+
+    public Address() {
     }
 
     public void setPostalCode(String postalCode) {
