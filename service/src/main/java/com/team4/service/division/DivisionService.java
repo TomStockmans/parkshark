@@ -24,9 +24,7 @@ public class DivisionService {
     }
 
     public List<Division> getAllDivisions(){
-        List<Division> divisions = new ArrayList<>();
-        divisionRepository.findAll().forEach(divisions::add);
-        return divisions;
+        return divisionRepository.findAll();
     }
 
     public Division getDivisionById(long id) {
