@@ -25,7 +25,7 @@ public class DivisionController {
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public DivisionDto createDivision(@RequestBody DivisionDto divisionDto) {
+    public DivisionDto createDivision(@RequestBody CreateDivisionDto divisionDto) {
         Division added = divisionService.createDivision(DivisionMapper.mapToDivision(divisionDto));
         return DivisionMapper.mapToDivisionDto(added);
     }
