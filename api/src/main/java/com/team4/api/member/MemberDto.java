@@ -12,13 +12,15 @@ public class MemberDto {
     private LicensePlate licensePlate;
     private String phoneNumber;
     private String email;
+    private LocalDate registrationDate;
 
-    public MemberDto(Name name, Address address, LicensePlate licensePlate, String phoneNumber, String email) {
+    public MemberDto(Name name, Address address, LicensePlate licensePlate, String phoneNumber, String email, LocalDate registrationDate) {
         this.name = name;
         this.address = address;
         this.licensePlate = licensePlate;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.registrationDate = registrationDate;
     }
 
     public Name getName() {
@@ -61,4 +63,11 @@ public class MemberDto {
         this.email = email;
     }
 
+    public LocalDate getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(LocalDate registrationDate) {
+        this.registrationDate = registrationDate;
+    }
 }

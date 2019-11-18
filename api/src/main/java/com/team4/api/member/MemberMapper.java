@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class MemberMapper {
 
     public static MemberDto mapToMemberDto(Member member){
-        return new MemberDto(member.getName(), member.getAddress(), member.getLicensePlate(), member.getPhoneNumber(), member.getEmail());
+        return new MemberDto(member.getName(), member.getAddress(), member.getLicensePlate(), member.getPhoneNumber(), member.getEmail(), member.getRegistrationDate());
     }
 
     public static FindAllMembersDto mapToFindAllMemberDto(Member member) {
