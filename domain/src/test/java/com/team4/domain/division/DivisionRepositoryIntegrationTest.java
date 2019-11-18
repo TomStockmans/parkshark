@@ -17,7 +17,7 @@ class DivisionRepositoryIntegrationTest {
 
     @Test
     void saveDivision_givenADivision_whenSaved_thenExistsInRepository() {
-        Division division = new Division("Best division", "Just a division", new Director("Niels", "Delestinne"));
+        Division division = new Division("Best division", "Just a division", new Director("Niels", "Delestinne"),null);
         Division saved = divisionRepository.save(division);
         Assertions.assertEquals(division, saved);
     }
