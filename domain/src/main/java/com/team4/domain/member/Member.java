@@ -46,6 +46,9 @@ public class Member implements Person {
     @Column(name = "REGISTRATION_DATE")
     private LocalDate registrationDate;
 
+    @Column(name = "MEMBERSHIP_LEVEL")
+    private MembershipLevel membershipLevel;
+
     public Member() {}
 
     public Member(Name name, Address address, String phoneNumber, String email, LicensePlate licensePlate) {
@@ -55,6 +58,17 @@ public class Member implements Person {
         this.email = email;
         this.licensePlate = licensePlate;
         this.registrationDate = LocalDate.now();
+        this.membershipLevel = MembershipLevel.BRONZE;
+    }
+
+    public Member(Name name, Address address, String phoneNumber, String email, LicensePlate licensePlate, MembershipLevel membershipLevel) {
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.licensePlate = licensePlate;
+        this.registrationDate = LocalDate.now();
+        this.membershipLevel = membershipLevel;
     }
 
     public long getId() {
@@ -83,6 +97,14 @@ public class Member implements Person {
 
     public LocalDate getRegistrationDate() {
         return registrationDate;
+    }
+
+    public MembershipLevel getMembershipLevel() {
+        return membershipLevel;
+    }
+
+    public void setMembershipLevel(MembershipLevel membershipLevel) {
+        this.membershipLevel = membershipLevel;
     }
 
     public void setName(Name name) {

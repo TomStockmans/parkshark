@@ -7,18 +7,28 @@ import com.team4.domain.member.Name;
 import java.time.LocalDate;
 
 public class MemberDto {
+    private long id;
     private Name name;
     private Address address;
     private LicensePlate licensePlate;
     private String phoneNumber;
     private String email;
+    private LocalDate registrationDate;
+    private String membershipLevel;
 
-    public MemberDto(Name name, Address address, LicensePlate licensePlate, String phoneNumber, String email) {
+    public MemberDto(long id, Name name, Address address, LicensePlate licensePlate, String phoneNumber, String email, String membershipLevel) {
+        this.id = id;
         this.name = name;
         this.address = address;
         this.licensePlate = licensePlate;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.registrationDate = LocalDate.now();
+        if (!membershipLevel.equals("SILVER") && !membershipLevel.equals("GOLD")) {
+            this.membershipLevel = "BRONZE";
+        } else {
+            this.membershipLevel = membershipLevel;
+        }
     }
 
     public Name getName() {
@@ -61,4 +71,11 @@ public class MemberDto {
         this.email = email;
     }
 
+    public String getMembershipLevel() {
+        return membershipLevel;
+    }
+
+    public void setMembershipLevel(String membershipLevel) {
+        this.membershipLevel = membershipLevel;
+    }
 }

@@ -2,6 +2,13 @@
 
 A setup with multiple profiles
 
+## TODO'S
+1. Tom's test are in src/main/test instead of src/test/java (see domain)
+2. Fix dependencies! Parent pom: every module has starter-web, starter-data,...
+3. Rest(ful) conventions: /members instead of /member
+    - POST /members instead of POST /member/register
+4. Create DTO's for name, license plate etc.
+
 ## Running (Development)
 By default, when executing `JpaSkeletonApplication`, the project will start with active Spring profile `dev`.
 - Every Spring boot application automatically reads in file `application.properties`, it is in here that we have set out default profile to `dev`.

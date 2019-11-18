@@ -1,6 +1,9 @@
 package com.team4.domain.parkinglot;
 
+import com.team4.domain.division.Division;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "PARKINGLOT")
@@ -19,11 +22,16 @@ public class ParkingLot {
     @ManyToOne(cascade = CascadeType.ALL)
     private ContactPerson contactPerson;
 
-    public ParkingLot(String name, ParkingCategory parkingCategory, int capacity, ContactPerson contactPerson) {
+    @ManyToOne()
+    @NotNull
+    private Division division;
+
+    public ParkingLot(String name, ParkingCategory parkingCategory, int capacity, ContactPerson contactPerson, Division division) {
         this.name = name;
         this.parkingCategory = parkingCategory;
         this.capacity = capacity;
         this.contactPerson = contactPerson;
+        this.division = division;
     }
 
     public ParkingLot() {
@@ -46,7 +54,12 @@ public class ParkingLot {
     }
 
     public ParkingCategory getParkingCategory() {
+
         return parkingCategory;
+    }
+
+    public Division getDivision() {
+        return division;
     }
 
     @Override
