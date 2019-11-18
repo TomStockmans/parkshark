@@ -25,4 +25,16 @@ public class Adress {
         }
         this.postalCode = postalCode;
     }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getStreetNr() {
+        return streetNr;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
 }

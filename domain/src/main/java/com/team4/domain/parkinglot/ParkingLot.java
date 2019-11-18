@@ -45,6 +45,10 @@ public class ParkingLot {
         return contactPerson;
     }
 
+    public ParkingCategory getParkingCategory() {
+        return parkingCategory;
+    }
+
     @Override
     public String toString() {
         return "ParkingLot{" +

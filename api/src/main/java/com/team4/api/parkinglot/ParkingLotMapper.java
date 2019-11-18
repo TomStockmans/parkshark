@@ -14,4 +14,24 @@ public class ParkingLotMapper {
                 parkingLot.getContactPerson().getMobilePhoneNumber()
         );
     }
+
+    public static SingleParkingLotDtoResponse objectToSingleParkingLotDtoResponse(ParkingLot parkingLot){
+        return new SingleParkingLotDtoResponse(
+                parkingLot.getId(),
+                parkingLot.getName(),
+                parkingLot.getParkingCategory(),
+                parkingLot.getCapacity(),
+                new SingleParkingLotDtoResponse.ContactPerson(
+                        parkingLot.getContactPerson().getId(),
+                        parkingLot.getContactPerson().getEmail(),
+                        parkingLot.getContactPerson().getMobilePhoneNumber(),
+                        parkingLot.getContactPerson().getTelephoneNumber(),
+                        new SingleParkingLotDtoResponse.ContactPerson.Adress(
+                                parkingLot.getContactPerson().getAdress().getStreet(),
+                                parkingLot.getContactPerson().getAdress().getStreetNr(),
+                                parkingLot.getContactPerson().getAdress().getPostalCode()
+                                )
+                )
+        );
+    }
 }

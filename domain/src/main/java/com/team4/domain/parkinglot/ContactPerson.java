@@ -55,4 +55,12 @@ public class ContactPerson {
     public String getMobilePhoneNumber() {
         return mobilePhoneNumber;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public Adress getAdress() {
+        return adress;
+    }
 }
