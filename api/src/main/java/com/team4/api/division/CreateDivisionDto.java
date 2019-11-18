@@ -1,14 +1,11 @@
 package com.team4.api.division;
 
-public class DivisionDto {
-
-    public final long id;
+public class CreateDivisionDto {
     public final String name;
     public final String originalName;
     public final DirectorDto director;
 
-    public DivisionDto(long id, String name, String originalName, DirectorDto director) {
-        this.id = id;
+    public CreateDivisionDto(String name, String originalName, DirectorDto director) {
         this.name = name;
         this.originalName = originalName;
         this.director = director;

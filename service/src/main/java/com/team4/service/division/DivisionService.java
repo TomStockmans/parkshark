@@ -1,6 +1,7 @@
 package com.team4.service.division;
 
 import com.team4.domain.division.Division;
+import com.team4.domain.division.DivisionException;
 import com.team4.domain.division.DivisionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,14 @@ public class DivisionService {
     }
 
     public List<Division> getAllDivisions(){
-        List<Division> divisions = new ArrayList<>();
-        divisionRepository.findAll().forEach(divisions::add);
-        return divisions;
+        return divisionRepository.findAll();
+    }
+
+    public Division getDivisionById(long id) {
+        var division = divisionRepository.findById(id);
+        if (division.isEmpty()){
+            throw new DivisionException("No division found with id: " + id);
+        }
+        return division.get();
     }
 }
