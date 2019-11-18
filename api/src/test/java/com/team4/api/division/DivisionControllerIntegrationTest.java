@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
@@ -15,8 +16,10 @@ import java.util.List;
 import static io.restassured.http.ContentType.JSON;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class DivisionControllerIntegrationTest {
+    @LocalServerPort
+    private int port;
 
     @Autowired
     private DivisionService divisionService;
@@ -36,6 +39,7 @@ class DivisionControllerIntegrationTest {
                         .accept(JSON)
                         .contentType(JSON)
                         .when()
+                        .port(port)
                         .get("/division")
                         .then()
                         .assertThat()
@@ -57,6 +61,7 @@ class DivisionControllerIntegrationTest {
                         .accept(JSON)
                         .contentType(JSON)
                         .when()
+                        .port(port)
                         .post("/division")
                         .then()
                         .assertThat()

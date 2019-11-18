@@ -5,9 +5,14 @@ import com.team4.api.parkinglot.ParkingLotResponseDto;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ParkingLotControllerTest {
+    @LocalServerPort
+    private int port;
 
     @Test
     void getAllParkingLotsTest() {
@@ -16,7 +21,7 @@ class ParkingLotControllerTest {
                 .accept(ContentType.JSON)
                 .contentType(ContentType.JSON)
                 .when()
-                .port(8080)
+                .port(port)
                 .get(ParkingLotController.PARKING_LOT_CONTROLLER_RESOURCE_URL)
                 .then()
                 .assertThat()
