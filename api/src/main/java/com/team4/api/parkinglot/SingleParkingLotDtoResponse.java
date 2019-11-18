@@ -1,5 +1,6 @@
 package com.team4.api.parkinglot;
 
+import com.team4.api.division.DivisionDto;
 import com.team4.domain.parkinglot.ParkingCategory;
 
 import java.util.Objects;
@@ -11,13 +12,16 @@ public class SingleParkingLotDtoResponse {
     public ParkingCategory parkingCategory;
     public int capacity;
     public ContactPerson contactPerson;
+    public DivisionDto divisionDto;
 
-    public SingleParkingLotDtoResponse(long id, String name, ParkingCategory parkingCategory, int capacity, ContactPerson contactPerson) {
+
+    public SingleParkingLotDtoResponse(long id, String name, ParkingCategory parkingCategory, int capacity, ContactPerson contactPerson, DivisionDto divisionDto) {
         this.id = id;
         this.name = name;
         this.parkingCategory = parkingCategory;
         this.capacity = capacity;
         this.contactPerson = contactPerson;
+        this.divisionDto = divisionDto;
     }
 
     public static class ContactPerson{
@@ -81,6 +85,7 @@ public class SingleParkingLotDtoResponse {
                 capacity == that.capacity &&
                 Objects.equals(name, that.name) &&
                 parkingCategory.equals(that.parkingCategory) &&
-                Objects.equals(contactPerson, that.contactPerson);
+                Objects.equals(contactPerson, that.contactPerson) &&
+                Objects.equals(divisionDto, that.divisionDto);
     }
 }

@@ -1,5 +1,7 @@
 package com.team4.api.division;
 
+import java.util.Objects;
+
 public class DivisionDto {
 
     public final long id;
@@ -13,4 +15,16 @@ public class DivisionDto {
         this.originalName = originalName;
         this.director = director;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DivisionDto that = (DivisionDto) o;
+        return Objects.equals(name, that.name) &&
+                Objects.equals(originalName, that.originalName) &&
+                Objects.equals(director, that.director);
+    }
+
+
 }
