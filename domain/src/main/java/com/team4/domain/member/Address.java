@@ -4,10 +4,10 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class Address {
-    private final String streetName;
-    private final String houseNumber;
-    private final String zipCode;
-    private final String country;
+    private String streetName;
+    private String houseNumber;
+    private String zipCode;
+    private String country;
 
     public Address(String streetName, String houseNumber, String zipCode, String country) {
         this.streetName = streetName;
@@ -16,4 +16,6 @@ public class Address {
         this.country = country;
     }
 
+    public Address() {
+    }
 }

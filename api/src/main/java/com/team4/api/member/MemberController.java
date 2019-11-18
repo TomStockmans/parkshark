@@ -1,14 +1,17 @@
 package com.team4.api.member;
 
+import com.team4.domain.member.Member;
 import com.team4.service.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping(MemberController.RESOURCE_URL)
@@ -24,10 +27,24 @@ public class MemberController {
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
-    public List<MemberDto> getAllMembers() {
+    public List<FindAllMembersDto> getAllMembers() {
         return memberService.getAllMembers().stream()
-                .map(MemberMapper::mapToMemberDto)
+                .map(MemberMapper::mapToFindAllMemberDto)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public MemberDto getMemberById(@PathVariable long id) {
+        Member member = memberService.getMemberById(id);
+        return MemberMapper.mapToMemberDto(member);
+    }
+
+    @PostMapping(path = "/register", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public MemberDto addBook(@RequestBody MemberDto memberDto) {
+        memberService.registerMember(MemberMapper.mapToMember(memberDto));
+        return MemberMapper.mapToMemberDto(MemberMapper.mapToMember(memberDto));
     }
 
 }
