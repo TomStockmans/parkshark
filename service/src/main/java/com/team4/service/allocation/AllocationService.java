@@ -33,4 +33,8 @@ public class AllocationService {
         return null;
     }
 
+    private boolean isParkingLotAvailable(long parkingLotId){
+        return true;
+    }
+
 }

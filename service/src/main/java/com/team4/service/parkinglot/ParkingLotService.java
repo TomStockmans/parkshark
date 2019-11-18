@@ -20,7 +20,7 @@ public class ParkingLotService {
         this.parkingLotRepository = parkingLotRepository;
     }
 
-    public List<ParkingLot> getAll(){
+    public List<ParkingLot> getAll() {
         return parkingLotRepository.findAll();
     }
 
@@ -28,7 +28,4 @@ public class ParkingLotService {
         return parkingLotRepository.findById(id).orElseThrow(() -> new ParkingLotException("no parkinglot found for this id"));
     }
 
-    public boolean hasAvailableCapacity(){
-        return true;
-    }
 }
