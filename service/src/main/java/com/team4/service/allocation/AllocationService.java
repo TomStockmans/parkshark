@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AllocationService {
     private final AllocationRepository allocationRepository;
@@ -46,19 +48,27 @@ public class AllocationService {
     }
 
     private boolean memberHasActiveParking(long memberId) {
-        int activeAllocations = allocationRepository.findAll(
-                Specification.where(AllocationRepository.hasMemberId(memberId))
-                        .and(AllocationRepository.isActive()))
-                .size();
+        int activeAllocations = allocationRepository.findAllByStopTimeNullAndMember_Id(memberId).size();
         return activeAllocations != 0;
     }
 
     private boolean isParkingLotAvailable(ParkingLot parkingLot){
-        int activeAllocations = allocationRepository.findAll(
-                Specification.where(AllocationRepository.hasParkingLotId(parkingLot.getId()))
-                .and(AllocationRepository.isActive()))
-                .size();
+        int activeAllocations = allocationRepository.findAllByStopTimeNullAndParkingLot_Id(parkingLot.getId()).size();
         return activeAllocations < parkingLot.getCapacity();
+    }
+
+    public Allocation stopAllocation(long allocationId){
+        var allocation = allocationRepository.findById(allocationId);
+        if (allocation.isEmpty()){
+            throw new AllocationException("No allocation found with id: " + allocationId);
+        }
+        allocation.get().stopAllocation();
+        return allocationRepository.save(allocation.get());
+    }
+
+    public List<Allocation> getByMemberId(long id){
+        Member member = memberService.getMemberById(id);
+        return allocationRepository.findAllByMemberIs(member);
     }
 
 }

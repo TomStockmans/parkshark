@@ -57,4 +57,12 @@ public class Allocation {
     public LocalDateTime getStopTime() {
         return stopTime;
     }
+
+    public Allocation stopAllocation(){
+        if (stopTime != null){
+            throw new AllocationException("Stop allocation failed: allocation has already been stopped");
+        }
+        this.stopTime = LocalDateTime.now();
+        return this;
+    }
 }
