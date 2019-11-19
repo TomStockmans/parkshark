@@ -68,11 +68,11 @@ public class AllocationService {
 
         switch (filter){
             case ACTIVE:
-                return allocationRepository.findByStopTimeNullOrderByStartTimeAsc();
+                //return allocationRepository.findByStopTimeNullOrderByStartTimeAsc();
             case STOPPED:
-                return allocationRepository.findByStopTimeNotNullOrderByStartTimeAsc();
+                //return allocationRepository.findByStopTimeNotNullOrderByStartTimeAsc();
             default:
-                return allocationRepository.findByOrderByStartTimeAsc();
+                return allocationRepository.findBy(PageRequest.of(0,2));
 
         }
 

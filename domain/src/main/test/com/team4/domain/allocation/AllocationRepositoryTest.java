@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -67,18 +69,27 @@ class AllocationRepositoryTest {
         parkingLot3 = parkingLotRepository.save(parkingLot3);
 
         allocation1 = allocationRepository.save(new Allocation(member2, parkingLot2));
+        //Thread.sleep(3000);
         allocation2 = allocationRepository.save(new Allocation(member1, parkingLot1));
         allocation3 = allocationRepository.save(new Allocation(member3, parkingLot3));
 
     }
 
     @Test
-    void whenAskedForAllAllocations_ThenAllAllocationsAreGivenInTheCorrectOrder() {
-        List<Allocation> allocations = allocationRepository.findByOrderByStartTimeAsc();
-        Assertions.assertTrue(allocations.size() == 3);
+    void whenAskedForAllAllocationsAndPagingisEnabled_ThenAllAllocationsAreGivenInTheCorrectOrder() {
+        List<Allocation> allocations = allocationRepository.findBy(PageRequest.of(0,2,Sort.by("startTime").ascending()));
+        Assertions.assertEquals(2, allocations.size());
         Assertions.assertEquals(allocation1, allocations.get(0));
         Assertions.assertEquals(allocation2, allocations.get(1));
-        Assertions.assertEquals(allocation3, allocations.get(2));
+
+    }
+
+    @Test
+    void whenAskedForAllAllocationsWithPagingAndSortingDescending_ThenAllAllocationsAreGivenInTheCorrectOrder() {
+        List<Allocation> allocations = allocationRepository.findBy(PageRequest.of(0,2,Sort.by("startTime").descending()));
+        Assertions.assertEquals(2, allocations.size());
+        Assertions.assertEquals(allocation3, allocations.get(0));
+        Assertions.assertEquals(allocation2, allocations.get(1));
 
     }
 }

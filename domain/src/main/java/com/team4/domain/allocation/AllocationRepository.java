@@ -1,5 +1,7 @@
 package com.team4.domain.allocation;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -20,11 +22,11 @@ public interface AllocationRepository extends PagingAndSortingRepository<Allocat
         return (allocation, query, builder) -> builder.isNull(allocation.get("stopTime"));
     }
 
-    List<Allocation> findByOrderByStartTimeAsc();
+    List<Allocation> findBy(Pageable pageable);
 
-    List<Allocation> findByStopTimeNullOrderByStartTimeAsc();
+    List<Allocation> findByStopTimeNullOrderByStartTimeAsc(Pageable pageable);
 
-    List<Allocation> findByStopTimeNotNullOrderByStartTimeAsc();
+    List<Allocation> findByStopTimeNotNullOrderByStartTimeAsc(Pageable pageable);
 
 
 /*
