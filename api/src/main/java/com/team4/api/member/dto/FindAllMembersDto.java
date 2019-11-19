@@ -1,32 +1,30 @@
-package com.team4.api.member;
-
-import com.team4.domain.member.Name;
+package com.team4.api.member.dto;
 
 import java.time.LocalDate;
 
 public class FindAllMembersDto {
     private long id;
-    private Name name;
+    private NameDto fullName;
     private String plateNumber;
     private String phoneNumber;
     private String email;
     private LocalDate registrationDate;
 
-    public FindAllMembersDto(long id, Name name, String plateNumber, String phoneNumber, String email, LocalDate registrationDate) {
+    public FindAllMembersDto(long id, NameDto fullName, String plateNumber, String phoneNumber, String email, LocalDate registrationDate) {
         this.id = id;
-        this.name = name;
+        this.fullName = fullName;
         this.plateNumber = plateNumber;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.registrationDate = registrationDate;
     }
 
-    public Name getName() {
-        return name;
+    public NameDto getName() {
+        return fullName;
     }
 
-    public void setName(Name name) {
-        this.name = name;
+    public void setName(NameDto fullName) {
+        this.fullName = fullName;
     }
 
     public void setId(long id) {

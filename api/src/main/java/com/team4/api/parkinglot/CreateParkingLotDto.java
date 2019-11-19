@@ -25,22 +25,22 @@ public class CreateParkingLotDto {
         public String email;
         public String mobilePhoneNumber;
         public String telephoneNumber;
-        public Adress adress;
+        public Address address;
 
-        public ContactPerson( String email, String mobilePhoneNumber, String telephoneNumber, Adress adress) {
+        public ContactPerson( String email, String mobilePhoneNumber, String telephoneNumber, Address address) {
             this.email = email;
             this.mobilePhoneNumber = mobilePhoneNumber;
             this.telephoneNumber = telephoneNumber;
-            this.adress = adress;
+            this.address = address;
         }
 
 
-        public static class Adress{
+        public static class Address {
             public String street;
             public String streetNr;
             public String postalCode;
 
-            public Adress(String street, String streetNr, String postalCode) {
+            public Address(String street, String streetNr, String postalCode) {
                 this.street = street;
                 this.streetNr = streetNr;
                 this.postalCode = postalCode;

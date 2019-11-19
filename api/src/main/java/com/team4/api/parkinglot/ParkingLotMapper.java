@@ -3,7 +3,6 @@ package com.team4.api.parkinglot;
 import com.team4.api.division.DirectorDto;
 import com.team4.api.division.DivisionDto;
 import com.team4.domain.division.Division;
-import com.team4.domain.parkinglot.Address;
 import com.team4.domain.parkinglot.ContactPerson;
 import com.team4.domain.parkinglot.ParkingLot;
 
@@ -18,10 +17,10 @@ public class ParkingLotMapper {
                         createParkingLotDto.contactPerson.email,
                         createParkingLotDto.contactPerson.mobilePhoneNumber,
                         createParkingLotDto.contactPerson.telephoneNumber,
-                        new Address(
-                                createParkingLotDto.contactPerson.adress.street,
-                                createParkingLotDto.contactPerson.adress.streetNr,
-                                createParkingLotDto.contactPerson.adress.postalCode
+                        new com.team4.domain.parkinglot.Address(
+                                createParkingLotDto.contactPerson.address.street,
+                                createParkingLotDto.contactPerson.address.streetNr,
+                                createParkingLotDto.contactPerson.address.postalCode
                         )
                 ),
                 division
@@ -50,7 +49,7 @@ public class ParkingLotMapper {
                         parkingLot.getContactPerson().getEmail(),
                         parkingLot.getContactPerson().getMobilePhoneNumber(),
                         parkingLot.getContactPerson().getTelephoneNumber(),
-                        new SingleParkingLotDtoResponse.ContactPerson.Adress(
+                        new SingleParkingLotDtoResponse.ContactPerson.Address(
                                 parkingLot.getContactPerson().getAddress().getStreet(),
                                 parkingLot.getContactPerson().getAddress().getStreetNr(),
                                 parkingLot.getContactPerson().getAddress().getPostalCode()

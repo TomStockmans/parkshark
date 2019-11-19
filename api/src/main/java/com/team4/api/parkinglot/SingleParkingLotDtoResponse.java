@@ -29,14 +29,14 @@ public class SingleParkingLotDtoResponse {
         public String email;
         public String mobilePhoneNumber;
         public String telephoneNumber;
-        public Adress adress;
+        public Address address;
 
-        public ContactPerson(long id, String email, String mobilePhoneNumber, String telephoneNumber, Adress adress) {
+        public ContactPerson(long id, String email, String mobilePhoneNumber, String telephoneNumber, Address address) {
             this.id = id;
             this.email = email;
             this.mobilePhoneNumber = mobilePhoneNumber;
             this.telephoneNumber = telephoneNumber;
-            this.adress = adress;
+            this.address = address;
 
 
         }
@@ -50,15 +50,15 @@ public class SingleParkingLotDtoResponse {
                     Objects.equals(email, that.email) &&
                     Objects.equals(mobilePhoneNumber, that.mobilePhoneNumber) &&
                     Objects.equals(telephoneNumber, that.telephoneNumber) &&
-                    Objects.equals(adress, that.adress);
+                    Objects.equals(address, that.address);
         }
 
-        public static class Adress{
+        public static class Address {
             public String street;
             public String streetNr;
             public String postalCode;
 
-            public Adress(String street, String streetNr, String postalCode) {
+            public Address(String street, String streetNr, String postalCode) {
                 this.street = street;
                 this.streetNr = streetNr;
                 this.postalCode = postalCode;
@@ -68,10 +68,10 @@ public class SingleParkingLotDtoResponse {
             public boolean equals(Object o) {
                 if (this == o) return true;
                 if (o == null || getClass() != o.getClass()) return false;
-                Adress adress = (Adress) o;
-                return Objects.equals(street, adress.street) &&
-                        Objects.equals(streetNr, adress.streetNr) &&
-                        Objects.equals(postalCode, adress.postalCode);
+                Address address = (Address) o;
+                return Objects.equals(street, address.street) &&
+                        Objects.equals(streetNr, address.streetNr) &&
+                        Objects.equals(postalCode, address.postalCode);
             }
         }
     }
