@@ -11,6 +11,7 @@ import com.team4.service.parkinglot.ParkingLotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -29,14 +30,14 @@ public class AllocationService {
 
     public Allocation startAllocation(long memberId, String licensePlateNumber, long parkingLotId) {
         Member member = memberService.getMemberById(memberId);
-        if (memberHasActiveParking(memberId)){
+        if (memberHasActiveParking(memberId)) {
             throw new AllocationException("Start allocation failed: member with id " + memberId + " already has an active allocation");
         }
         if (!isLicensePlateValid(licensePlateNumber, member)) {
             throw new AllocationException("Start allocation failed: given license plate number does not match member");
         }
         ParkingLot parkingLot = parkingLotService.getById(parkingLotId);
-        if (!isParkingLotAvailable(parkingLot)){
+        if (!isParkingLotAvailable(parkingLot)) {
             throw new AllocationException("Start allocation failed: no available space");
         }
         Allocation allocation = new Allocation(member, parkingLot);
@@ -52,21 +53,20 @@ public class AllocationService {
         return activeAllocations != 0;
     }
 
-    private boolean isParkingLotAvailable(ParkingLot parkingLot){
+    private boolean isParkingLotAvailable(ParkingLot parkingLot) {
         int activeAllocations = allocationRepository.findAllByStopTimeNullAndParkingLot_Id(parkingLot.getId()).size();
         return activeAllocations < parkingLot.getCapacity();
     }
 
-    public Allocation stopAllocation(long allocationId){
-        var allocation = allocationRepository.findById(allocationId);
-        if (allocation.isEmpty()){
-            throw new AllocationException("No allocation found with id: " + allocationId);
-        }
-        allocation.get().stopAllocation();
-        return allocationRepository.save(allocation.get());
+    @Transactional
+    public Allocation stopAllocation(long allocationId) {
+        return allocationRepository
+                .findById(allocationId)
+                    .orElseThrow(() -> new AllocationException("No allocation found with id: " + allocationId))
+                .stopAllocation();
     }
 
-    public List<Allocation> getByMemberId(long id){
+    public List<Allocation> getByMemberId(long id) {
         Member member = memberService.getMemberById(id);
         return allocationRepository.findAllByMemberIs(member);
     }
