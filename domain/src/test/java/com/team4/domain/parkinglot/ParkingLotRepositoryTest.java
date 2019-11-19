@@ -23,7 +23,8 @@ class ParkingLotRepositoryTest {
 
     @Test
     void whenAddingNewCorrectParkingLot_parkingLotIsAdded() {
-        Division division = new Division("Awesome Division", "Shitty Division", new Director("Nick", "Lemaire"), null);
+        Division division = new Division("Awesome division", "Old division name..", new Director("Niels", "Delestinne"),null);
+
         division = divisionRepository.save(division);
         final Division divisionFinal = division;
         Assertions.assertDoesNotThrow(() -> parkingLotRepository.save(new ParkingLot("plaatsen", ParkingCategory.UNDERGROUND_BUILDING, 5,
@@ -34,7 +35,9 @@ class ParkingLotRepositoryTest {
 
     @Test
     void whenFindAllIsTrigger_AListIsReturned() {
-        Division division = new Division("Awesome Division", "Shitty Division", new Director("Nick", "Lemaire"), null);
+
+        Division division = new Division("Awesome division", "Old division name..", new Director("Niels", "Delestinne"),null);
+
         division = divisionRepository.save(division);
         final Division divisionFinal = division;
 
