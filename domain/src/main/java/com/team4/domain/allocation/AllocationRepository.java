@@ -10,6 +10,10 @@ public interface AllocationRepository extends CrudRepository<Allocation, Long>, 
         return (allocation, query, builder) -> builder.equal(allocation.get("parkingLot"), id);
     }
 
+    static Specification<Allocation> hasMemberId(long id) {
+        return (allocation, query, builder) -> builder.equal(allocation.get("member"), id);
+    }
+
     static Specification<Allocation> isActive() {
         return (allocation, query, builder) -> builder.isNull(allocation.get("stopTime"));
     }
