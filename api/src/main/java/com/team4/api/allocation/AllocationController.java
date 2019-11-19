@@ -37,10 +37,18 @@ public class AllocationController {
         return AllocationMapper.toDto(allocation);
     }
 
+
     @GetMapping
-    public List<AllocationDtoResponse> getAllAllocations(@RequestParam int limit, @RequestParam AllocationFilter filter){
-        allocationService.getAllAllocations(limit, filter);
+    public List<AllocationDtoResponse> getAllAllocations(@RequestParam int limit, @RequestParam AllocationFilter filter) {
+        allocationService.getAllAllocations(0, limit, filter,null);
         return null;
+    }
+
+    @PostMapping(path = "/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public AllocationDto stopAllocation(@PathVariable long id){
+        return AllocationMapper.toDto(allocationService.stopAllocation(id));
+
     }
 
 }

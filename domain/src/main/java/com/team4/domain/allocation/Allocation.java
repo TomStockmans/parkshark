@@ -4,6 +4,7 @@ import com.team4.domain.member.Member;
 import com.team4.domain.parkinglot.ParkingLot;
 
 import javax.persistence.*;
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -36,6 +37,14 @@ public class Allocation {
         this.startTime = LocalDateTime.now();
     }
 
+    public Allocation(Member member, ParkingLot parkingLot, Clock clock) {
+        this.member = member;
+        this.parkingLot = parkingLot;
+        this.startTime = LocalDateTime.now(clock);
+    }
+
+
+
     public Allocation() {
     }
 
@@ -59,15 +68,33 @@ public class Allocation {
         return stopTime;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Allocation that = (Allocation) o;
         return id == that.id &&
-                Objects.equals(member, that.member) &&
-                Objects.equals(parkingLot, that.parkingLot) &&
-                Objects.equals(startTime, that.startTime) &&
-                Objects.equals(stopTime, that.stopTime);
+                member.equals(that.member) &&
+                parkingLot.equals(that.parkingLot) &&
+                startTime.equals(that.startTime) &&
+                stopTime.equals(that.stopTime);
+    }
+
+    @Override
+    public String toString() {
+        return "Allocation{" +
+                "id=" + id +
+                ", member=" + member +
+                ", parkingLot=" + parkingLot +
+                ", startTime=" + startTime +
+                ", stopTime=" + stopTime +
+                '}';
+    }
+
+    public Allocation stopAllocation(){
+        this.stopTime = LocalDateTime.now();
+        return this;
+
     }
 }

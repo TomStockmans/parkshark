@@ -17,13 +17,13 @@ public class ContactPerson {
     private String telephoneNumber;
 
     @Embedded
-    private Adress adress;
+    private Address address;
 
 
-    public ContactPerson(String email, String mobilePhoneNumber, String telephoneNumber, Adress adress) {
+    public ContactPerson(String email, String mobilePhoneNumber, String telephoneNumber, Address address) {
         setEmail(email);
         setMobileAndTelephoneNumber(mobilePhoneNumber, telephoneNumber);
-        this.adress = adress;
+        this.address = address;
     }
 
     public ContactPerson() {
@@ -60,7 +60,7 @@ public class ContactPerson {
         return id;
     }
 
-    public Adress getAdress() {
-        return adress;
+    public Address getAddress() {
+        return address;
     }
 }

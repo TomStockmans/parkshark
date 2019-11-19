@@ -1,16 +1,15 @@
 package com.team4.service.allocation;
 
-import com.team4.domain.allocation.Allocation;
-import com.team4.domain.allocation.AllocationException;
-import com.team4.domain.allocation.AllocationFilter;
-import com.team4.domain.allocation.AllocationRepository;
+import com.team4.domain.allocation.*;
 import com.team4.domain.member.Member;
+import com.team4.domain.member.MembershipLevel;
 import com.team4.domain.parkinglot.ParkingLot;
 import com.team4.service.member.MemberService;
 import com.team4.service.parkinglot.ParkingLotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -34,8 +33,7 @@ public class AllocationService {
         if (memberHasActiveParking(memberId)){
             throw new AllocationException("Start allocation failed: member with id " + memberId + " already has an active allocation");
         }
-        if (!member.getLicensePlate().getPlateNumber().equals(licensePlateNumber)) {
-            //TODO: Add check: plates can be different when membership level is gold
+        if (!isLicensePlateValid(licensePlateNumber, member)) {
             throw new AllocationException("Start allocation failed: given license plate number does not match member");
         }
         ParkingLot parkingLot = parkingLotService.getById(parkingLotId);
@@ -44,6 +42,10 @@ public class AllocationService {
         }
         Allocation allocation = new Allocation(member, parkingLot);
         return allocationRepository.save(allocation);
+    }
+
+    private boolean isLicensePlateValid(String licensePlateNumber, Member member) {
+        return member.getMembershipLevel() == MembershipLevel.GOLD || member.getLicensePlate().getPlateNumber().equals(licensePlateNumber);
     }
 
     private boolean memberHasActiveParking(long memberId) {
@@ -62,20 +64,32 @@ public class AllocationService {
         return activeAllocations < parkingLot.getCapacity();
     }
 
-    public List<Allocation> getAllAllocations(int limit, AllocationFilter filter){
 
-        Pageable pageable =  PageRequest.of(0, limit);
+    public List<Allocation> getAllAllocations(int start, int limit, AllocationFilter allocationFilter, OrderFilter orderFilter) {
 
-        switch (filter){
-            case ACTIVE:
-                //return allocationRepository.findByStopTimeNullOrderByStartTimeAsc();
-            case STOPPED:
-                //return allocationRepository.findByStopTimeNotNullOrderByStartTimeAsc();
-            default:
-                return allocationRepository.findBy(PageRequest.of(0,2));
+        Pageable pageable = PageRequest.of(start, limit);
 
+        if(orderFilter.equals(OrderFilter.DESC)){
+            pageable = PageRequest.of(start,limit, Sort.by("startTime").descending());
         }
 
+        switch (allocationFilter) {
+            case ACTIVE:
+                return allocationRepository.findByStopTimeNull(pageable);
+            case STOPPED:
+                return allocationRepository.findByStopTimeNotNull(pageable);
+            default:
+                return allocationRepository.findBy(pageable);
+
+        }
+    }
+
+    public Allocation stopAllocation(long allocationId){
+        var allocation = allocationRepository.findById(allocationId);
+        if (allocation.isEmpty()){
+            throw new AllocationException("No allocation found with id: " + allocationId);
+        }
+        return allocation.get().stopAllocation();
     }
 
 }

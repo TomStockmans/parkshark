@@ -12,7 +12,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 @DataJpaTest
 @AutoConfigureTestDatabase
 class ParkingLotRepositoryTest {
-
     private final ParkingLotRepository parkingLotRepository;
     private final DivisionRepository divisionRepository;
 
@@ -25,26 +24,29 @@ class ParkingLotRepositoryTest {
     @Test
     void whenAddingNewCorrectParkingLot_parkingLotIsAdded() {
         Division division = new Division("Awesome division", "Old division name..", new Director("Niels", "Delestinne"),null);
+
         division = divisionRepository.save(division);
         final Division divisionFinal = division;
         Assertions.assertDoesNotThrow(() -> parkingLotRepository.save(new ParkingLot("plaatsen", ParkingCategory.UNDERGROUND_BUILDING, 5,
                 new ContactPerson("tom.st@g.be", "0496209967", null,
-                        new Adress("elfnovemberlaan", "82", "3010, Leuven")),divisionFinal))
+                        new Address("elfnovemberlaan", "82", "3010, Leuven")), divisionFinal))
         );
     }
 
     @Test
     void whenFindAllIsTrigger_AListIsReturned() {
+
         Division division = new Division("Awesome division", "Old division name..", new Director("Niels", "Delestinne"),null);
+
         division = divisionRepository.save(division);
         final Division divisionFinal = division;
 
         parkingLotRepository.save(new ParkingLot("pk1", ParkingCategory.UNDERGROUND_BUILDING, 5,
                 new ContactPerson("tom.st@g.be", "0496209967", null,
-                        new Adress("elfnovemberlaan", "82", "3000, Leuven")),divisionFinal));
+                        new Address("elfnovemberlaan", "82", "3000, Leuven")), divisionFinal));
         parkingLotRepository.save(new ParkingLot("pk2", ParkingCategory.ABOVE_GROUND_MEMBER, 7,
                 new ContactPerson("nick.st@g.be", "0496858585", null,
-                        new Adress("groove street", "69", "3010, Kessel-lo")),divisionFinal));
-        Assertions.assertTrue(parkingLotRepository.findAll().size() == 2 );
+                        new Address("groove street", "69", "3010, Kessel-lo")), divisionFinal));
+        Assertions.assertTrue(parkingLotRepository.findAll().size() == 2);
     }
 }
