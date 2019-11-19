@@ -12,11 +12,14 @@
     <artifactId>api</artifactId>
 
     <dependencies>
+        <!-- Internal -->
         <dependency>
             <groupId>com.team4</groupId>
             <artifactId>service</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <!-- Internal end -->
+        <!-- Testing -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
@@ -37,13 +40,13 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.5.2</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
         </dependency>
+        <!-- Testing end -->
         <!-- Swagger -->
         <dependency>
             <groupId>io.springfox</groupId>
