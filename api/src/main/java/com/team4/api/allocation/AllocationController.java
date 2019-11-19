@@ -59,8 +59,9 @@ public class AllocationController {
 
     @GetMapping(params = "member", produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public List<AllocationDto> getAllocationsForMember(@RequestParam long member) {
-        List<Allocation> allocations = allocationService.getByMemberId(member);
+    public List<AllocationDto> getAllocationsForMember(@RequestParam long member,
+                                                       @RequestParam AllocationFilter filter) {
+        List<Allocation> allocations = allocationService.getByMemberId(member, filter);
         return allocations.stream()
                 .map(AllocationMapper::toDto)
                 .collect(Collectors.toList());
