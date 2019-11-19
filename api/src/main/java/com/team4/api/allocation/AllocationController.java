@@ -45,7 +45,7 @@ public class AllocationController {
 
         return allocationService.getAllAllocations(start, limit, allocationFilter, orderFilter)
                 .stream()
-                .map(a -> AllocationMapper.toDto(a))
+                .map(AllocationMapper::toDto)
                 .collect(Collectors.toList());
 
     }
