@@ -76,7 +76,7 @@ class MemberControllerIntegrationTest {
 
     @Test
     void registerMember_givenCorrectDto_thenCreateMember() {
-        CreateMemberDto memberDto = new CreateMemberDto(0, new Name("Fran", "Cash"), new Address("Via Roma", "100", "1090","Italy"), new LicensePlate("test", "test"), "029954583", "test.test@test.com", "GOLD");
+        CreateMemberDto memberDto = new CreateMemberDto(new Name("Fran", "Cash"), new Address("Via Roma", "100", "1090","Italy"), new LicensePlate("test", "test"), "029954583", "test.test@test.com", "GOLD");
         MemberDto newMember =
                 RestAssured
                         .given()

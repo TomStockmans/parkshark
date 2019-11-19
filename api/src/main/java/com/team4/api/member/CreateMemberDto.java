@@ -8,7 +8,6 @@ import java.time.LocalDate;
 
 public class CreateMemberDto {
 
-    private long id;
     private Name name;
     private Address address;
     private LicensePlate licensePlate;
@@ -16,8 +15,7 @@ public class CreateMemberDto {
     private String email;
     private String membershipLevel;
 
-    public CreateMemberDto(long id, Name name, Address address, LicensePlate licensePlate, String phoneNumber, String email, String membershipLevel) {
-        this.id = id;
+    public CreateMemberDto(Name name, Address address, LicensePlate licensePlate, String phoneNumber, String email, String membershipLevel) {
         this.name = name;
         this.address = address;
         this.licensePlate = licensePlate;
