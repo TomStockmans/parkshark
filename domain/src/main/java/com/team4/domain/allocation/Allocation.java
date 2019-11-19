@@ -43,8 +43,6 @@ public class Allocation {
         this.startTime = LocalDateTime.now(clock);
     }
 
-
-
     public Allocation() {
     }
 

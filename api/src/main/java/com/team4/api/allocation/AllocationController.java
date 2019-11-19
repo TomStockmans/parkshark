@@ -1,12 +1,15 @@
 package com.team4.api.allocation;
 
         import com.team4.domain.allocation.AllocationFilter;
+        import com.team4.domain.allocation.OrderFilter;
         import com.team4.service.allocation.AllocationService;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.web.bind.annotation.*;
 
         import java.util.List;
-import com.team4.domain.allocation.Allocation;
+        import java.util.stream.Collectors;
+
+        import com.team4.domain.allocation.Allocation;
 import com.team4.service.allocation.AllocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,9 +42,16 @@ public class AllocationController {
 
 
     @GetMapping
-    public List<AllocationDtoResponse> getAllAllocations(@RequestParam int limit, @RequestParam AllocationFilter filter) {
-        allocationService.getAllAllocations(0, limit, filter,null);
-        return null;
+    public List<AllocationDto> getAllAllocations(@RequestParam int start,
+                                                         @RequestParam int limit,
+                                                         @RequestParam AllocationFilter allocationFilter,
+                                                         @RequestParam OrderFilter orderFilter) {
+
+        return allocationService.getAllAllocations(start, limit, allocationFilter,orderFilter)
+                .stream()
+                .map(a -> AllocationMapper.toDto(a))
+                .collect(Collectors.toList());
+
     }
 
     @PostMapping(path = "/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)

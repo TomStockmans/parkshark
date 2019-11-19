@@ -56,14 +56,6 @@ class AllocationRepositoryTest {
         this.divisionRepository = divisionRepository;
     }
 
-    private void wipeRepository() {
-        if (allocation1 != null && allocation2 != null && allocation3 != null) {
-            allocationRepository.delete(allocation1);
-            allocationRepository.delete(allocation2);
-            allocationRepository.delete(allocation3);
-        }
-    }
-
     @BeforeEach
     void setUp() {
 
@@ -119,14 +111,6 @@ class AllocationRepositoryTest {
         clock = Clock.fixed(Instant.parse("2019-12-25T10:15:30.00Z"), ZoneId.of("UTC"));
         allocation4 = allocationRepository.save(new Allocation(member4, parkingLot4,clock));
         allocation4.stopAllocation();
-    }
-
-    private void sleep1seconds() {
-        try {
-            Thread.sleep(1000);
-        } catch (Exception e) {
-
-        }
     }
 
     @Test
