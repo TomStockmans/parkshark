@@ -61,4 +61,13 @@ public class AllocationService {
         return activeAllocations < parkingLot.getCapacity();
     }
 
+    public Allocation stopAllocation(long allocationId){
+        var allocation = allocationRepository.findById(allocationId);
+        if (allocation.isEmpty()){
+            throw new AllocationException("No allocation found with id: " + allocationId);
+        }
+        return allocation.get().stopAllocation();
+
+    }
+
 }
