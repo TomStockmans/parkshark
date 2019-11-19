@@ -20,7 +20,7 @@ public class ParkingLotService {
         this.parkingLotRepository = parkingLotRepository;
     }
 
-    public List<ParkingLot> getAll(){
+    public List<ParkingLot> getAll() {
         return parkingLotRepository.findAll();
     }
 
@@ -31,4 +31,5 @@ public class ParkingLotService {
     public ParkingLot addNewParkingLot(ParkingLot parkingLot) {
         return parkingLotRepository.save(parkingLot);
     }
+
 }
