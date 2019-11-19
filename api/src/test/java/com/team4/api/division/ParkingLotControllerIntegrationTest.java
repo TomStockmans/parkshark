@@ -82,10 +82,9 @@ class ParkingLotControllerIntegrationTest {
 
         Division division = new Division("Awesome division", "Old division name..", new Director("Niels", "Delestinne"),null);
         division = divisionRepository.save(division);
-        ParkingLot parkingLot = new ParkingLot("pk3", ParkingCategory.ABOVE_GROUND_MEMBER, 8,
+        ParkingLot parkingLot = parkingLotRepository.save( new ParkingLot("pk3", ParkingCategory.ABOVE_GROUND_MEMBER, 8,
                 new ContactPerson("unknown.st@g.be", "0496858585", null,
-                        new Address("groove street", "96", "3010, Kessel-lo")), division);
-        parkingLotRepository.save(parkingLot);
+                        new Address("groove street", "96", "3010, Kessel-lo")), division));
 
         SingleParkingLotDtoResponse singleParkingLotDto = ParkingLotMapper.objectToSingleParkingLotDtoResponse(parkingLot);
 
@@ -95,7 +94,7 @@ class ParkingLotControllerIntegrationTest {
                 .contentType(ContentType.JSON)
                 .when()
                 .port(port)
-                .get(ParkingLotController.PARKING_LOT_CONTROLLER_RESOURCE_URL + "/1")
+                .get(ParkingLotController.PARKING_LOT_CONTROLLER_RESOURCE_URL + "/" + parkingLot.getId())
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.OK.value())

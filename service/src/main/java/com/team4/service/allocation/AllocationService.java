@@ -14,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 import java.time.Clock;
 import java.time.Instant;
@@ -129,7 +126,6 @@ public class AllocationService {
         ParkingLot parkingLot4 = parkingLotService.addNewParkingLot(new ParkingLot("pk4", ParkingCategory.ABOVE_GROUND_MEMBER, 9,
                 new ContactPerson("un.knrown@g.be", "0496878285", null,
                         new com.team4.domain.parkinglot.Address("jbksdbv", "78", "3010, dssdc")), divisionFinal));
-        System.out.println("id of member: " + member2.getId());
         Clock clock = Clock.fixed(Instant.parse("2019-12-22T10:15:30.00Z"), ZoneId.of("UTC"));
         allocationRepository.save(new Allocation(member2, parkingLot2,clock));
         clock = Clock.fixed(Instant.parse("2019-12-23T10:15:30.00Z"), ZoneId.of("UTC"));

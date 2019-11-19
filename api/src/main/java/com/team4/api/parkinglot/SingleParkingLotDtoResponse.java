@@ -88,4 +88,16 @@ public class SingleParkingLotDtoResponse {
                 Objects.equals(contactPerson, that.contactPerson) &&
                 Objects.equals(divisionDto, that.divisionDto);
     }
+
+    @Override
+    public String toString() {
+        return "SingleParkingLotDtoResponse{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", parkingCategory=" + parkingCategory +
+                ", capacity=" + capacity +
+                ", contactPerson=" + contactPerson +
+                ", divisionDto=" + divisionDto +
+                '}';
+    }
 }
