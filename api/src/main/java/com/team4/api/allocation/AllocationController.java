@@ -7,6 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping(AllocationController.RESOURCE_URL)
 public class AllocationController {
@@ -35,6 +39,15 @@ public class AllocationController {
     @ResponseStatus(HttpStatus.OK)
     public AllocationDto stopAllocation(@PathVariable long id){
         return AllocationMapper.toDto(allocationService.stopAllocation(id));
+    }
+
+    @GetMapping(params = "member", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public List<AllocationDto> getAllocationsForMember(@RequestParam long member){
+        List<Allocation> allocations = allocationService.getByMemberId(member);
+        return allocations.stream()
+                .map(AllocationMapper::toDto)
+                .collect(Collectors.toList());
     }
 
 }
