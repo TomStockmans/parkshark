@@ -84,7 +84,7 @@ class ParkingLotControllerIntegrationTest {
         division = divisionRepository.save(division);
         ParkingLot parkingLot = new ParkingLot("pk3", ParkingCategory.ABOVE_GROUND_MEMBER, 8,
                 new ContactPerson("unknown.st@g.be", "0496858585", null,
-                        new Adress("groove street", "96", "3010, Kessel-lo")), division);
+                        new Address("groove street", "96", "3010, Kessel-lo")), division);
         parkingLotRepository.save(parkingLot);
 
         SingleParkingLotDtoResponse singleParkingLotDto = ParkingLotMapper.objectToSingleParkingLotDtoResponse(parkingLot);
