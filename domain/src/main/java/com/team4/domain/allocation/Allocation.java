@@ -4,7 +4,9 @@ import com.team4.domain.member.Member;
 import com.team4.domain.parkinglot.ParkingLot;
 
 import javax.persistence.*;
+import java.time.Clock;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "ALLOCATION")
@@ -35,6 +37,12 @@ public class Allocation {
         this.startTime = LocalDateTime.now();
     }
 
+    public Allocation(Member member, ParkingLot parkingLot, Clock clock) {
+        this.member = member;
+        this.parkingLot = parkingLot;
+        this.startTime = LocalDateTime.now(clock);
+    }
+
     public Allocation() {
     }
 
@@ -58,11 +66,36 @@ public class Allocation {
         return stopTime;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Allocation that = (Allocation) o;
+        return id == that.id &&
+                member.equals(that.member) &&
+                parkingLot.equals(that.parkingLot) &&
+                startTime.equals(that.startTime) &&
+                stopTime.equals(that.stopTime);
+    }
+
+    @Override
+    public String toString() {
+        return "Allocation{" +
+                "id=" + id +
+                ", member=" + member +
+                ", parkingLot=" + parkingLot +
+                ", startTime=" + startTime +
+                ", stopTime=" + stopTime +
+                '}';
+    }
+
     public Allocation stopAllocation(){
         if (stopTime != null){
             throw new AllocationException("Stop allocation failed: allocation has already been stopped");
         }
         this.stopTime = LocalDateTime.now();
         return this;
+
     }
 }
