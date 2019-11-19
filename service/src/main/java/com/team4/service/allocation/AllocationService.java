@@ -4,6 +4,7 @@ import com.team4.domain.allocation.Allocation;
 import com.team4.domain.allocation.AllocationException;
 import com.team4.domain.allocation.AllocationRepository;
 import com.team4.domain.member.Member;
+import com.team4.domain.member.MembershipLevel;
 import com.team4.domain.parkinglot.ParkingLot;
 import com.team4.service.member.MemberService;
 import com.team4.service.parkinglot.ParkingLotService;
@@ -29,8 +30,7 @@ public class AllocationService {
         if (memberHasActiveParking(memberId)){
             throw new AllocationException("Start allocation failed: member with id " + memberId + " already has an active allocation");
         }
-        if (!member.getLicensePlate().getPlateNumber().equals(licensePlateNumber)) {
-            //TODO: Add check: plates can be different when membership level is gold
+        if (!isLicensePlateValid(licensePlateNumber, member)) {
             throw new AllocationException("Start allocation failed: given license plate number does not match member");
         }
         ParkingLot parkingLot = parkingLotService.getById(parkingLotId);
@@ -39,6 +39,10 @@ public class AllocationService {
         }
         Allocation allocation = new Allocation(member, parkingLot);
         return allocationRepository.save(allocation);
+    }
+
+    private boolean isLicensePlateValid(String licensePlateNumber, Member member) {
+        return member.getMembershipLevel() == MembershipLevel.GOLD || member.getLicensePlate().getPlateNumber().equals(licensePlateNumber);
     }
 
     private boolean memberHasActiveParking(long memberId) {
