@@ -1,10 +1,8 @@
-package com.team4.api.member;
+package com.team4.api.member.dto;
 
 import com.team4.domain.member.Address;
 import com.team4.domain.member.LicensePlate;
 import com.team4.domain.member.Name;
-
-import java.time.LocalDate;
 
 public class CreateMemberDto {
 

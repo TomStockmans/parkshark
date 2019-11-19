@@ -1,25 +1,21 @@
-package com.team4.api.member;
-
-import com.team4.domain.member.Address;
-import com.team4.domain.member.LicensePlate;
-import com.team4.domain.member.Name;
+package com.team4.api.member.dto;
 
 import java.time.LocalDate;
 
 public class MemberDto {
     private long id;
-    private Name name;
-    private Address address;
-    private LicensePlate licensePlate;
+    private NameDto fullName;
+    private AddressDto addressDto;
+    private LicensePlateDto licensePlate;
     private String phoneNumber;
     private String email;
     private LocalDate registrationDate;
     private String membershipLevel;
 
-    public MemberDto(long id, Name name, Address address, LicensePlate licensePlate, String phoneNumber, String email, String membershipLevel) {
+    public MemberDto(long id, NameDto fullName, AddressDto addressDto, LicensePlateDto licensePlate, String phoneNumber, String email, String membershipLevel) {
         this.id = id;
-        this.name = name;
-        this.address = address;
+        this.fullName = fullName;
+        this.addressDto = addressDto;
         this.licensePlate = licensePlate;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -31,27 +27,27 @@ public class MemberDto {
         }
     }
 
-    public Name getName() {
-        return name;
+    public NameDto getName() {
+        return fullName;
     }
 
-    public void setName(Name name) {
-        this.name = name;
+    public void setName(NameDto name) {
+        this.fullName = name;
     }
 
-    public Address getAddress() {
-        return address;
+    public AddressDto getAddressDto() {
+        return addressDto;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddressDto(AddressDto addressDto) {
+        this.addressDto = addressDto;
     }
 
-    public LicensePlate getLicensePlate() {
+    public LicensePlateDto getLicensePlate() {
         return licensePlate;
     }
 
-    public void setLicensePlate(LicensePlate licensePlate) {
+    public void setLicensePlate(LicensePlateDto licensePlate) {
         this.licensePlate = licensePlate;
     }
 

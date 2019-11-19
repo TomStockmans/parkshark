@@ -36,7 +36,7 @@ class ParkingLotControllerIntegrationTest {
                         "tom.st@m.be",
                         "0496209967",
                         "016258179",
-                        new CreateParkingLotDto.ContactPerson.Adress(
+                        new CreateParkingLotDto.ContactPerson.Address(
                                 "elfnovemberlaan",
                                 "82",
                                 "3010, Kessel-lo"
