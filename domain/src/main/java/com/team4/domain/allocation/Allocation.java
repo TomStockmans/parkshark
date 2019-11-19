@@ -37,4 +37,24 @@ public class Allocation {
 
     public Allocation() {
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public ParkingLot getParkingLot() {
+        return parkingLot;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalDateTime getStopTime() {
+        return stopTime;
+    }
 }
