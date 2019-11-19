@@ -5,6 +5,7 @@ import com.team4.domain.parkinglot.ParkingLot;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "ALLOCATION")
@@ -56,5 +57,17 @@ public class Allocation {
 
     public LocalDateTime getStopTime() {
         return stopTime;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Allocation that = (Allocation) o;
+        return id == that.id &&
+                Objects.equals(member, that.member) &&
+                Objects.equals(parkingLot, that.parkingLot) &&
+                Objects.equals(startTime, that.startTime) &&
+                Objects.equals(stopTime, that.stopTime);
     }
 }
