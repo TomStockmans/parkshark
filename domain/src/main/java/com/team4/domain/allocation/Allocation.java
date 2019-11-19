@@ -57,4 +57,9 @@ public class Allocation {
     public LocalDateTime getStopTime() {
         return stopTime;
     }
+
+    public Allocation stopAllocation(){
+        this.stopTime = LocalDateTime.now();
+        return this;
+    }
 }

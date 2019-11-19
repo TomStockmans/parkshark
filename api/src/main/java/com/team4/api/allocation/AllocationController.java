@@ -31,4 +31,10 @@ public class AllocationController {
         return AllocationMapper.toDto(allocation);
     }
 
+    @PostMapping(path = "/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public AllocationDto stopAllocation(@PathVariable long id){
+        return AllocationMapper.toDto(allocationService.stopAllocation(id));
+    }
+
 }
