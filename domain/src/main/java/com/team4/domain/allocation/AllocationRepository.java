@@ -6,7 +6,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import java.util.List;
 
 public interface AllocationRepository extends PagingAndSortingRepository<Allocation, Long> {
-
+/*
 
     //findall
     public List<Allocation> getAllByOrderByStartTime(Pageable pageable);
@@ -16,6 +16,7 @@ public interface AllocationRepository extends PagingAndSortingRepository<Allocat
 
     //filter on stopped allocations
     public List<Allocation> findAllByStopTimeIsNotNullAndOrderByStartTime(Pageable pageable);
+    */
 
 
 
