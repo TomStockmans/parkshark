@@ -97,9 +97,15 @@ public class AllocationService {
         }
     }
 
-    public List<Allocation> getByMemberId(long id) {
-        Member member = memberService.getMemberById(id);
-        return allocationRepository.findAllByMemberIs(member);
+    public List<Allocation> getByMemberId(long id, AllocationFilter allocationFilter) {
+        switch (allocationFilter) {
+            case ACTIVE:
+                return allocationRepository.findAllByStopTimeNullAndMember_Id(id);
+            case STOPPED:
+                return allocationRepository.findAllByStopTimeNotNullAndMember_Id(id);
+            default:
+                return allocationRepository.findAllByMember_Id(id);
+        }
     }
 
     private void addTestData() {
