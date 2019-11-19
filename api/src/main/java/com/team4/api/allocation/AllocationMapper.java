@@ -10,7 +10,7 @@ public class AllocationMapper {
                 allocation.getMember().getId(),
                 allocation.getParkingLot().getId(),
                 allocation.getStartTime().toString(),
-                allocation.getStopTime().toString()
+                allocation.getStopTime() == null ? null : allocation.getStopTime().toString()
         );
     }
 }

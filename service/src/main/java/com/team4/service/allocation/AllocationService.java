@@ -41,7 +41,8 @@ public class AllocationService {
     private boolean isParkingLotAvailable(ParkingLot parkingLot){
         int activeAllocations = allocationRepository.findAll(
                 Specification.where(AllocationRepository.hasParkingLotId(parkingLot.getId()))
-                .and(AllocationRepository.isActive())).size();
+                .and(AllocationRepository.isActive()))
+                .size();
         if (activeAllocations < parkingLot.getCapacity()){
             return true;
         }

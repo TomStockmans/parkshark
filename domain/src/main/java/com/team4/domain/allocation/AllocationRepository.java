@@ -7,10 +7,10 @@ import org.springframework.data.repository.CrudRepository;
 public interface AllocationRepository extends CrudRepository<Allocation, Long>, JpaSpecificationExecutor<Allocation> {
 
     static Specification<Allocation> hasParkingLotId(long id) {
-        return (allocation, query, builder) -> builder.equal(allocation.get("PARKINGLOT_ID"), id);
+        return (allocation, query, builder) -> builder.equal(allocation.get("parkingLot"), id);
     }
 
     static Specification<Allocation> isActive() {
-        return (allocation, query, builder) -> builder.isNull(allocation.get("STOP_TIME"));
+        return (allocation, query, builder) -> builder.isNull(allocation.get("stopTime"));
     }
 }
