@@ -78,4 +78,12 @@ public class MemberDto {
     public void setMembershipLevel(String membershipLevel) {
         this.membershipLevel = membershipLevel;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public LocalDate getRegistrationDate() {
+        return registrationDate;
+    }
 }
