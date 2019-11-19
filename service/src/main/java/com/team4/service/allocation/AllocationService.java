@@ -127,10 +127,10 @@ public class AllocationService {
         Clock clock = Clock.fixed(Instant.parse("2019-12-22T10:15:30.00Z"), ZoneId.of("UTC"));
         allocationRepository.save(new Allocation(member2, parkingLot2, clock));
         clock = Clock.fixed(Instant.parse("2019-12-23T10:15:30.00Z"), ZoneId.of("UTC"));
-        allocationRepository.save(new Allocation(member1, parkingLot1, clock)).stopAllocation();
+        stopAllocation(allocationRepository.save(new Allocation(member1, parkingLot1, clock)).getId());
         clock = Clock.fixed(Instant.parse("2019-12-24T10:15:30.00Z"), ZoneId.of("UTC"));
-        allocationRepository.save(new Allocation(member3, parkingLot3, clock)).stopAllocation();
+        allocationRepository.save(new Allocation(member3, parkingLot3, clock));
         clock = Clock.fixed(Instant.parse("2019-12-25T10:15:30.00Z"), ZoneId.of("UTC"));
-        allocationRepository.save(new Allocation(member4, parkingLot4, clock)).stopAllocation();
+        stopAllocation(allocationRepository.save(new Allocation(member4, parkingLot4, clock)).getId());
     }
 }
