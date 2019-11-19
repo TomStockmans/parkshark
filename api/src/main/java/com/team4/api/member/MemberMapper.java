@@ -1,6 +1,7 @@
 package com.team4.api.member;
 
 import com.team4.domain.member.Member;
+import com.team4.domain.member.MembershipLevel;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,7 +16,7 @@ public class MemberMapper {
     }
 
     public static Member toDomain(CreateMemberDto createMemberDto) {
-        return new Member(createMemberDto.getName(), createMemberDto.getAddress(), createMemberDto.getPhoneNumber(), createMemberDto.getEmail(), createMemberDto.getLicensePlate());
+        return new Member(createMemberDto.getName(), createMemberDto.getAddress(), createMemberDto.getPhoneNumber(), createMemberDto.getEmail(), createMemberDto.getLicensePlate(), MembershipLevel.valueOf(createMemberDto.getMembershipLevel()));
 
     }
 }

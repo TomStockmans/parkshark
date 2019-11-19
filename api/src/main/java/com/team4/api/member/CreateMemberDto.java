@@ -13,13 +13,19 @@ public class CreateMemberDto {
     private LicensePlate licensePlate;
     private String phoneNumber;
     private String email;
+    private String membershipLevel;
 
-    public CreateMemberDto(Name name, Address address, LicensePlate licensePlate, String phoneNumber, String email) {
+    public CreateMemberDto(Name name, Address address, LicensePlate licensePlate, String phoneNumber, String email, String membershipLevel) {
         this.name = name;
         this.address = address;
         this.licensePlate = licensePlate;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        if (!membershipLevel.equals("SILVER") && !membershipLevel.equals("GOLD")) {
+            this.membershipLevel = "BRONZE";
+        } else {
+            this.membershipLevel = membershipLevel;
+        }
     }
 
     public Name getName() {
@@ -62,5 +68,11 @@ public class CreateMemberDto {
         this.email = email;
     }
 
+    public String getMembershipLevel() {
+        return membershipLevel;
+    }
 
+    public void setMembershipLevel(String membershipLevel) {
+        this.membershipLevel = membershipLevel;
+    }
 }
