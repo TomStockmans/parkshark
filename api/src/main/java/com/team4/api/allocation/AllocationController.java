@@ -67,4 +67,14 @@ public class AllocationController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping(params = "parkingLot", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public List<AllocationDto> getAllocationsForParkingLot(@RequestParam long parkingLot,
+                                                           @RequestParam AllocationFilter filter) {
+        List<Allocation> allocations = allocationService.getByParkingLotId(parkingLot, filter);
+        return allocations.stream()
+                .map(AllocationMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
 }

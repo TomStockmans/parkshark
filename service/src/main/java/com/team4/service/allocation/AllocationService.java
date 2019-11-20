@@ -139,4 +139,15 @@ public class AllocationService {
         clock = Clock.fixed(Instant.parse("2019-12-25T10:15:30.00Z"), ZoneId.of("UTC"));
         stopAllocation(allocationRepository.save(new Allocation(member4, parkingLot4, clock)).getId());
     }
+
+    public List<Allocation> getByParkingLotId(long id, AllocationFilter filter) {
+        switch (filter) {
+            case ACTIVE:
+                return allocationRepository.findAllByStopTimeNullAndParkingLot_Id(id);
+            case STOPPED:
+                return allocationRepository.findAllByStopTimeNotNullAndParkingLot_Id(id);
+            default:
+                return allocationRepository.findAllByParkingLot_Id(id);
+        }
+    }
 }

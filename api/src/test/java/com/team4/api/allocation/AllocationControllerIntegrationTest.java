@@ -126,4 +126,37 @@ class AllocationControllerIntegrationTest {
 
         assertThat(allocationDto.stopTime).isNotNull();
     }
+
+//    @Test
+//    void getAllocationByMemberId_givenCorrectIdWithFilterAll() {
+//        Allocation allocation = allocationService.startAllocation(
+//                member.getId(),
+//                member.getLicensePlate().getPlateNumber(),
+//                parkingLot.getId()
+//        );
+//        allocationService.stopAllocation(allocation.getId());
+//
+//        Allocation allocation2 = allocationService.startAllocation(
+//                member.getId(),
+//                member.getLicensePlate().getPlateNumber(),
+//                parkingLot.getId()
+//        );
+//
+//
+//        AllocationDto[] allocationDto =
+//                RestAssured
+//                        .given()
+//                        .accept(JSON)
+//                        .contentType(JSON)
+//                        .when()
+//                        .port(port)
+//                        .post("/allocations?member=1" + member.getId() + "&filter=ALL")
+//                        .then()
+//                        .assertThat()
+//                        .statusCode(HttpStatus.OK.value())
+//                        .extract()
+//                        .as(AllocationDto[].class);
+//        assertThat(allocationDto.length).isEqualTo(2);
+//    }
+
 }

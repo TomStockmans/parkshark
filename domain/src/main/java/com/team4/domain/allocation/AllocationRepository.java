@@ -10,11 +10,13 @@ import java.util.List;
 
 public interface AllocationRepository extends PagingAndSortingRepository<Allocation, Long>, JpaSpecificationExecutor<Allocation> {
 
-    List<Allocation> findAllByMemberIs(Member member);
     List<Allocation> findAllByMember_Id(long id);
     List<Allocation> findAllByStopTimeNullAndMember_Id(long id);
     List<Allocation> findAllByStopTimeNotNullAndMember_Id(long id);
+
+    List<Allocation> findAllByParkingLot_Id(long id);
     List<Allocation> findAllByStopTimeNullAndParkingLot_Id(long id);
+    List<Allocation> findAllByStopTimeNotNullAndParkingLot_Id(long id);
 
     List<Allocation> findBy(Pageable pageable);
 
