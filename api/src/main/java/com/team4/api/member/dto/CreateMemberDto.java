@@ -24,6 +24,7 @@ public class CreateMemberDto {
         } else {
             this.membershipLevel = membershipLevel;
         }
+
     }
 
     public Name getName() {
