@@ -96,7 +96,7 @@ class AllocationControllerIntegrationTest {
     @Test
     void startAllocation_givenInvalidMemberId_thenThrowException() {
         assertThatThrownBy(() -> {
-            allocationService.startAllocation(999,"KING888", parkingLot.getId());
+            allocationService.startAllocation(999, "KING888", parkingLot.getId());
         }).isInstanceOf(MemberException.class);
     }
 
@@ -127,36 +127,193 @@ class AllocationControllerIntegrationTest {
         assertThat(allocationDto.stopTime).isNotNull();
     }
 
-//    @Test
-//    void getAllocationByMemberId_givenCorrectIdWithFilterAll() {
-//        Allocation allocation = allocationService.startAllocation(
-//                member.getId(),
-//                member.getLicensePlate().getPlateNumber(),
-//                parkingLot.getId()
-//        );
-//        allocationService.stopAllocation(allocation.getId());
-//
-//        Allocation allocation2 = allocationService.startAllocation(
-//                member.getId(),
-//                member.getLicensePlate().getPlateNumber(),
-//                parkingLot.getId()
-//        );
-//
-//
-//        AllocationDto[] allocationDto =
-//                RestAssured
-//                        .given()
-//                        .accept(JSON)
-//                        .contentType(JSON)
-//                        .when()
-//                        .port(port)
-//                        .post("/allocations?member=1" + member.getId() + "&filter=ALL")
-//                        .then()
-//                        .assertThat()
-//                        .statusCode(HttpStatus.OK.value())
-//                        .extract()
-//                        .as(AllocationDto[].class);
-//        assertThat(allocationDto.length).isEqualTo(2);
-//    }
+    @Test
+    void getAllocationByMemberId_givenCorrectIdWithFilterAll() {
+        Allocation allocation = allocationService.startAllocation(
+                member.getId(),
+                member.getLicensePlate().getPlateNumber(),
+                parkingLot.getId()
+        );
+        allocationService.stopAllocation(allocation.getId());
 
+        Allocation allocation2 = allocationService.startAllocation(
+                member.getId(),
+                member.getLicensePlate().getPlateNumber(),
+                parkingLot.getId()
+        );
+
+        AllocationDto[] allocationDto =
+                RestAssured
+                        .given()
+                        .accept(JSON)
+                        .contentType(JSON)
+                        .when()
+                        .port(port)
+                        .get("/allocations?member=" + member.getId() + "&filter=ALL")
+                        .then()
+                        .assertThat()
+                        .statusCode(HttpStatus.OK.value())
+                        .extract()
+                        .as(AllocationDto[].class);
+        assertThat(allocationDto.length).isEqualTo(2);
+    }
+
+    @Test
+    void getAllocationByMemberId_givenCorrectIdWithFilterACTIVE() {
+        Allocation allocation = allocationService.startAllocation(
+                member.getId(),
+                member.getLicensePlate().getPlateNumber(),
+                parkingLot.getId()
+        );
+        allocationService.stopAllocation(allocation.getId());
+
+        Allocation allocation2 = allocationService.startAllocation(
+                member.getId(),
+                member.getLicensePlate().getPlateNumber(),
+                parkingLot.getId()
+        );
+
+        AllocationDto[] allocationDto =
+                RestAssured
+                        .given()
+                        .accept(JSON)
+                        .contentType(JSON)
+                        .when()
+                        .port(port)
+                        .get("/allocations?member=" + member.getId() + "&filter=ACTIVE")
+                        .then()
+                        .assertThat()
+                        .statusCode(HttpStatus.OK.value())
+                        .extract()
+                        .as(AllocationDto[].class);
+        assertThat(allocationDto.length).isEqualTo(1);
+        assertThat(allocationDto[0].allocationId).isEqualTo(allocation2.getId());
+    }
+
+    @Test
+    void getAllocationByMemberId_givenCorrectIdWithFilterSTOPPED() {
+        Allocation allocation = allocationService.startAllocation(
+                member.getId(),
+                member.getLicensePlate().getPlateNumber(),
+                parkingLot.getId()
+        );
+        allocationService.stopAllocation(allocation.getId());
+
+        Allocation allocation2 = allocationService.startAllocation(
+                member.getId(),
+                member.getLicensePlate().getPlateNumber(),
+                parkingLot.getId()
+        );
+
+        AllocationDto[] allocationDto =
+                RestAssured
+                        .given()
+                        .accept(JSON)
+                        .contentType(JSON)
+                        .when()
+                        .port(port)
+                        .get("/allocations?member=" + member.getId() + "&filter=STOPPED")
+                        .then()
+                        .assertThat()
+                        .statusCode(HttpStatus.OK.value())
+                        .extract()
+                        .as(AllocationDto[].class);
+        assertThat(allocationDto.length).isEqualTo(1);
+        assertThat(allocationDto[0].allocationId).isEqualTo(allocation.getId());
+    }
+
+    @Test
+    void getAllocationByParkingLotId_givenCorrectIdWithFilterAll() {
+        Allocation allocation = allocationService.startAllocation(
+                member.getId(),
+                member.getLicensePlate().getPlateNumber(),
+                parkingLot.getId()
+        );
+        allocationService.stopAllocation(allocation.getId());
+
+        Allocation allocation2 = allocationService.startAllocation(
+                member.getId(),
+                member.getLicensePlate().getPlateNumber(),
+                parkingLot.getId()
+        );
+
+        AllocationDto[] allocationDto =
+                RestAssured
+                        .given()
+                        .accept(JSON)
+                        .contentType(JSON)
+                        .when()
+                        .port(port)
+                        .get("/allocations?parkingLot=" + parkingLot.getId() + "&filter=ALL")
+                        .then()
+                        .assertThat()
+                        .statusCode(HttpStatus.OK.value())
+                        .extract()
+                        .as(AllocationDto[].class);
+        assertThat(allocationDto.length).isEqualTo(2);
+    }
+
+    @Test
+    void getAllocationByParkingLotId_givenCorrectIdWithFilterACTIVE() {
+        Allocation allocation = allocationService.startAllocation(
+                member.getId(),
+                member.getLicensePlate().getPlateNumber(),
+                parkingLot.getId()
+        );
+        allocationService.stopAllocation(allocation.getId());
+
+        Allocation allocation2 = allocationService.startAllocation(
+                member.getId(),
+                member.getLicensePlate().getPlateNumber(),
+                parkingLot.getId()
+        );
+
+        AllocationDto[] allocationDto =
+                RestAssured
+                        .given()
+                        .accept(JSON)
+                        .contentType(JSON)
+                        .when()
+                        .port(port)
+                        .get("/allocations?parkingLot=" + parkingLot.getId() + "&filter=ACTIVE")
+                        .then()
+                        .assertThat()
+                        .statusCode(HttpStatus.OK.value())
+                        .extract()
+                        .as(AllocationDto[].class);
+        assertThat(allocationDto.length).isEqualTo(1);
+        assertThat(allocationDto[0].allocationId).isEqualTo(allocation2.getId());
+    }
+
+    @Test
+    void getAllocationByParkingLotId_givenCorrectIdWithFilterSTOPPED() {
+        Allocation allocation = allocationService.startAllocation(
+                member.getId(),
+                member.getLicensePlate().getPlateNumber(),
+                parkingLot.getId()
+        );
+        allocationService.stopAllocation(allocation.getId());
+
+        Allocation allocation2 = allocationService.startAllocation(
+                member.getId(),
+                member.getLicensePlate().getPlateNumber(),
+                parkingLot.getId()
+        );
+
+        AllocationDto[] allocationDto =
+                RestAssured
+                        .given()
+                        .accept(JSON)
+                        .contentType(JSON)
+                        .when()
+                        .port(port)
+                        .get("/allocations?parkingLot=" + parkingLot.getId() + "&filter=STOPPED")
+                        .then()
+                        .assertThat()
+                        .statusCode(HttpStatus.OK.value())
+                        .extract()
+                        .as(AllocationDto[].class);
+        assertThat(allocationDto.length).isEqualTo(1);
+        assertThat(allocationDto[0].allocationId).isEqualTo(allocation.getId());
+    }
 }
