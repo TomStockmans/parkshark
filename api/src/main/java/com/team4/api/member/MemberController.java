@@ -1,6 +1,7 @@
 package com.team4.api.member;
 
 import com.team4.api.member.dto.CreateMemberDto;
+import com.team4.api.member.dto.CreateMemberDtoValidator;
 import com.team4.api.member.dto.FindAllMembersDto;
 import com.team4.api.member.dto.MemberDto;
 import com.team4.api.member.mapper.MemberMapper;
@@ -43,19 +44,14 @@ public class MemberController {
     @GetMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public MemberDto getMemberById(@PathVariable long id) {
-        try {
             Member member = memberService.getMemberById(id);
             return MemberMapper.toDto(member);
-        } catch (MemberException e) {
-            e.getMessage();
-            e.printStackTrace();
-        }
-        return null;
     }
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public MemberDto registerMember(@RequestBody CreateMemberDto createMemberDto) {
+        CreateMemberDtoValidator.isValidCreateMemberDto(createMemberDto);
         Member memberToCreate = memberService.registerMember(MemberMapper.toDomain(createMemberDto));
         return MemberMapper.toDto(memberToCreate);
     }
