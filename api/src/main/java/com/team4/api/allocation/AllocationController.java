@@ -50,6 +50,15 @@ public class AllocationController {
 
     }
 
+    @GetMapping(path = "/duration")
+    public List<AllocationDto> getAllAllocationsWithDuration() {
+        return allocationService.getAllAllocations(0, 100, AllocationFilter.ALL, OrderFilter.ASC)
+                .stream()
+                .map(AllocationMapper::toDto)
+                .collect(Collectors.toList());
+
+    }
+
     @PostMapping(path = "/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public AllocationDto stopAllocation(@PathVariable long id) {

@@ -130,13 +130,13 @@ public class AllocationService {
         ParkingLot parkingLot4 = parkingLotService.addNewParkingLot(new ParkingLot("pk4", ParkingCategory.ABOVE_GROUND_MEMBER, 9,
                 new ContactPerson("un.knrown@g.be", "0496878285", null,
                         new com.team4.domain.parkinglot.Address("jbksdbv", "78", "3010, dssdc")), divisionFinal));
-        Clock clock = Clock.fixed(Instant.parse("2019-12-22T10:15:30.00Z"), ZoneId.of("UTC"));
+        Clock clock = Clock.fixed(Instant.parse("2019-11-17T10:15:30.00Z"), ZoneId.of("UTC"));
         allocationRepository.save(new Allocation(member2, parkingLot2, clock));
-        clock = Clock.fixed(Instant.parse("2019-12-23T10:15:30.00Z"), ZoneId.of("UTC"));
+        clock = Clock.fixed(Instant.parse("2019-11-20T10:15:30.00Z"), ZoneId.of("UTC"));
         stopAllocation(allocationRepository.save(new Allocation(member1, parkingLot1, clock)).getId());
-        clock = Clock.fixed(Instant.parse("2019-12-24T10:15:30.00Z"), ZoneId.of("UTC"));
+        clock = Clock.fixed(Instant.parse("2019-11-19T10:15:30.00Z"), ZoneId.of("UTC"));
         allocationRepository.save(new Allocation(member3, parkingLot3, clock));
-        clock = Clock.fixed(Instant.parse("2019-12-25T10:15:30.00Z"), ZoneId.of("UTC"));
+        clock = Clock.fixed(Instant.parse("2019-11-18T10:15:30.00Z"), ZoneId.of("UTC"));
         stopAllocation(allocationRepository.save(new Allocation(member4, parkingLot4, clock)).getId());
     }
 }
