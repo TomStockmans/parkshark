@@ -37,7 +37,7 @@ public class AllocationService {
         this.parkingLotService = parkingLotService;
         this.divisionService = divisionService;
 
-        addTestData();
+        //addTestData();
     }
 
     public Allocation startAllocation(long memberId, String licensePlateNumber, long parkingLotId) {

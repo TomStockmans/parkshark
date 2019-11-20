@@ -24,6 +24,7 @@ public class ParkingLot {
 
     @ManyToOne()
     @NotNull
+    @JoinColumn(name = "DIVISION_ID")
     private Division division;
 
     public ParkingLot(String name, ParkingCategory parkingCategory, int capacity, ContactPerson contactPerson, Division division) {

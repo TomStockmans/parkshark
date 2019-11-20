@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table
+@Table(name = "MEMBER")
 public class Member implements Person {
 
     @Id
