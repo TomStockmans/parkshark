@@ -2,6 +2,7 @@ package com.team4.api;
 
 import com.team4.domain.allocation.AllocationException;
 import com.team4.domain.division.DivisionException;
+import com.team4.domain.member.CreateMemberDtoException;
 import com.team4.domain.member.MemberException;
 import com.team4.domain.parkinglot.ParkingLotException;
 import org.slf4j.Logger;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @ControllerAdvice
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
@@ -24,19 +26,25 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(AllocationException.class)
     protected void allocationException(AllocationException ex, HttpServletResponse response) throws IOException {
-        LOGGER.info(ex.getMessage(), ex);
+        LOGGER.warn(ex.getMessage(), ex);
         response.sendError(BAD_REQUEST.value(), ex.getMessage());
     }
 
     @ExceptionHandler(MemberException.class)
     protected void memberException(MemberException ex, HttpServletResponse response) throws IOException {
-        LOGGER.info(ex.getMessage(), ex);
+        LOGGER.warn(ex.getMessage(), ex);
+        response.sendError(NOT_FOUND.value(), ex.getMessage());
+    }
+
+    @ExceptionHandler(CreateMemberDtoException.class)
+    protected void createMemberException(CreateMemberDtoException ex, HttpServletResponse response) throws IOException {
+        LOGGER.warn(ex.getMessage(), ex);
         response.sendError(BAD_REQUEST.value(), ex.getMessage());
     }
 
     @ExceptionHandler(DivisionException.class)
     protected void divisionException(DivisionException ex, HttpServletResponse response) throws IOException {
-        LOGGER.info(ex.getMessage(), ex);
+        LOGGER.warn(ex.getMessage(), ex);
         response.sendError(BAD_REQUEST.value(), ex.getMessage());
     }
 
