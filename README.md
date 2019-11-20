@@ -31,7 +31,7 @@ You can also execute the application with profile `production` which can be used
  
 ## Tests
 Two different test configurations have been provided
-1. When profile **test** is activated (`SecretRepositoryIntegrationTest` and `UserRepositoryV2IntegrationTest`), the `schema.sql` is
+1. When profile **test** is activated (`SecretRepositoryIntegrationTest` and `UserRepositoryV2IntegrationTest`), the schema.sql is
 executed before the tests
 2. When profile **test** is not activated (`UserRepositoryIntegrationTest`), Hibernate will automatically create (and drop) the schema
 based on the JPA annotations on our entity classes.
